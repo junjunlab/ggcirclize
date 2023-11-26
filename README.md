@@ -36,7 +36,7 @@ remotes::install_github("junjunlab/ggcirclize")
 
 ## Documentation
 
-> ***[https://junjunlab.github.io/ggChIPvis-manual/](https://junjunlab.github.io/ggChIPvis-manual/)***
+Currently not be written.
 
 ---
 
