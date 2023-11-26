@@ -40,6 +40,11 @@
 #'
 #' @return A graphical object of class 'grob'.
 #'
+#' @import utils ggplot2
+#' @importFrom scales rescale
+#' @importFrom grid convertWidth gTree gpar grid.pretty linesGrob nullGrob pointsGrob
+#' @importFrom grid polygonGrob polylineGrob segmentsGrob stringWidth textGrob unit
+#'
 #' @examples
 #' \dontrun{
 #' # Create an arc axis
@@ -100,6 +105,8 @@ arcAxisGrob <- function(start = 0,end = 60,
 }
 
 
+
+#' @noRd
 #' @export
 makeContent.arcAxisGrob <- function(x){
   g <- .arcAxisGrob(start = x$start,end = x$end,
@@ -343,7 +350,7 @@ makeContent.arcAxisGrob <- function(x){
     if(is.null(breaks.label)){
       # labels <- paste0(round(seq(start,end,length = breaks.n),digits = 2),"°")
       if(is.null(xscale)){
-        labels <- paste0(pretty.at,"°")
+        labels <- paste0(pretty.at,"\u00b0")
       }else{
         labels <- pretty.at
       }
@@ -670,3 +677,4 @@ makeContent.arcAxisGrob <- function(x){
                                      minor.grob,arc.label.grob),
               name = "arcAxisGrob")
 }
+

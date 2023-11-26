@@ -1,12 +1,87 @@
 Package: ggcirclize
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Title: Create Circular Elegant Visualisations Using the Grammar of Ggplot2
+Version: 0.0.1
+Author: Jun Zhang
+Maintainer: Jun Zhang <3219030654@stu.cpu.edu.cn>
+BugReports: https://github.com/junjunlab/ggcirclize/issues
+Description: It's aiming to extend circular plot in ggplot2 visualisation systerm with
+  the grammar of ggplot2.
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
+Imports: 
+    circlize,
+    cli,
+    DescTools,
+    ggplot2,
+    grid,
+    lifecycle,
+    magrittr,
+    rlang,
+    scales,
+    tibble,
+    utils,
+    vctrs
+Collate: 
+    'arcAxisGrob.R'
+    'arcLinesGrob.R'
+    'arcLinksGrob.R'
+    'arcPointGrob.R'
+    'arcPolygonGrob.R'
+    'arcRectGrob.R'
+    'arcSectorGrob.R'
+    'arcSegmentsGrob.R'
+    'arcTextGrob.R'
+    'chromInfo-Data.R'
+    'facet_sector.R'
+    'geom_arcribbon.R'
+    'geom_arcarea.R'
+    'geom_arcrect.R'
+    'geom_arcbar.R'
+    'geom_arcboxplot.R'
+    'geom_arccol.R'
+    'geom_arcdensity.R'
+    'geom_archistogram.R'
+    'geom_arcline.R'
+    'geom_arclinerange.R'
+    'geom_arcpath.R'
+    'geom_arcpoint.R'
+    'geom_arcpolygon.R'
+    'geom_arcrossbar.R'
+    'geom_arcsector.R'
+    'geom_arcsegment.R'
+    'geom_arctext.R'
+    'geom_arctile.R'
+    'geom_arcviolin.R'
+    'geom_trackarea.R'
+    'geom_trackbar.R'
+    'geom_trackboxplot.R'
+    'geom_trackcol.R'
+    'geom_trackdensity.R'
+    'geom_trackgenomicarea.R'
+    'geom_trackgenomicdensity.R'
+    'geom_trackgenomiclabel.R'
+    'geom_trackgenomicline.R'
+    'geom_trackgenomiclink.R'
+    'geom_trackgenomicpoint.R'
+    'geom_trackgenomicrainfall.R'
+    'geom_trackgenomicrect.R'
+    'geom_trackgenomictile.R'
+    'geom_trackhist.R'
+    'geom_trackline.R'
+    'geom_trackpoint.R'
+    'geom_trackrect.R'
+    'geom_trackribbon.R'
+    'geom_tracksector.R'
+    'geom_tracktile.R'
+    'geom_trackviolin.R'
+    'ggcirclize-package.R'
+    'ggcirclize.R'
+    'utilities-funcs.R'
+    'utilities-ggplot2.R'
+    'utils-pipe.R'
+    'zzz.R'
+Depends: 
+    R (>= 2.10)
+LazyData: true
