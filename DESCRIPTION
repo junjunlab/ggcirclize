@@ -54,6 +54,7 @@ Collate:
     'geom_arctext.R'
     'geom_arctile.R'
     'geom_arcviolin.R'
+    'geom_cpoint.R'
     'geom_trackarea.R'
     'geom_trackbar.R'
     'geom_trackboxplot.R'
