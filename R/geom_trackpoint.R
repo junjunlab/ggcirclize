@@ -58,10 +58,22 @@ GeomTrackpoint <- ggproto("GeomTrackpoint", GeomArcpoint,
                                 new_panel_params <- panel_params
                                 if(!panel_params$x$is_discrete()){
                                   xAxis.params <- modifyList(list(xscale = range(data$x)),xAxis.params)
+                                }else{
+                                  xAxis.params <- modifyList(list(xscale = range(data$x - 0.5,
+                                                                                 data$x + 0.5),
+                                                                  breaks = 1:length(new_panel_params$x$breaks),
+                                                                  breaks.label = new_panel_params$x$limits),
+                                                             xAxis.params)
                                 }
 
-                                if(!panel_params$x$is_discrete()){
+                                if(!panel_params$y$is_discrete()){
                                   yAxis.params <- modifyList(list(yscale = range(data$y)),yAxis.params)
+                                }else{
+                                  yAxis.params <- modifyList(list(yscale = range(data$y - 0.5,
+                                                                                 data$y + 0.5),
+                                                                  breaks = 1:length(new_panel_params$y$breaks),
+                                                                  breaks.label = new_panel_params$y$limits),
+                                                             yAxis.params)
                                 }
                               }else if(scales == "free_x"){
                                 tmp_data <- tmp_data[order(tmp_data$x),]
