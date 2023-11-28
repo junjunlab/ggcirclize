@@ -72,7 +72,7 @@ arcPointGrob <- function(x = NULL,y = NULL,
 }
 
 
-#' @noRd
+#' @method makeContent arcPointGrob
 #' @export
 makeContent.arcPointGrob <- function(x){
   g <- .arcPointGrob(x = x$x,y = x$y,

@@ -74,7 +74,7 @@ arcSegmentsGrob <- function(xmin = NULL,xmax = NULL,
 }
 
 
-#' @noRd
+#' @method makeContent arcSegmentsGrob
 #' @export
 makeContent.arcSegmentsGrob <- function(x){
   g <- .arcSegmentsGrob(xmin = x$xmin,xmax = x$xmax,

@@ -70,7 +70,7 @@ arcLinksGrob <- function(start = 0,end = 60,
 }
 
 
-#' @noRd
+#' @method makeContent arcLinksGrob
 #' @export
 makeContent.arcLinksGrob <- function(x){
   g <- .arcLinksGrob(start = x$start,end = x$end,

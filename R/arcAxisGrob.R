@@ -106,7 +106,7 @@ arcAxisGrob <- function(start = 0,end = 60,
 
 
 
-#' @noRd
+#' @method makeContent arcAxisGrob
 #' @export
 makeContent.arcAxisGrob <- function(x){
   g <- .arcAxisGrob(start = x$start,end = x$end,

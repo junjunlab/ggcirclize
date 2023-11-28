@@ -22,6 +22,8 @@
 #' ggcirclize(data = my_data, mapping = aes(x = value, y = category))
 #' }
 #'
+#' @import ggplot2
+#'
 #' @export
 ggcirclize <- function(data = NULL,
                        mapping = aes(),

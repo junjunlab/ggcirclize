@@ -87,7 +87,7 @@ arcSectorGrob <- function(start = 0,end = 360,
 }
 
 
-#' @noRd
+#' @method makeContent arcSectorGrob
 #' @export
 makeContent.arcSectorGrob <- function(x){
   g <- .arcSectorGrob(start = x$start,end = x$end,

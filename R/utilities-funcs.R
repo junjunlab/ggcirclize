@@ -50,3 +50,13 @@ download_chromInfo <- function(genome = "hg19"){
 }
 
 
+
+#' @export
+#' @import grid
+newpage <- function(){
+  grid.newpage()
+  pushViewport(viewport(width = 0.9,height = 0.9,
+                        xscale = c(-1,1),yscale = c(-1,1),
+                        default.units = "snpc"))
+  grid.circle(r = 0.5,gp = gpar(fill = "grey95",col = NA))
+}

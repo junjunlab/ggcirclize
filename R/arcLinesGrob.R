@@ -74,7 +74,7 @@ arcLinesGrob <- function(x = NULL,y = NULL,
 }
 
 
-#' @noRd
+#' @method makeContent arcLinesGrob
 #' @export
 makeContent.arcLinesGrob <- function(x){
   g <- .arcLinesGrob(x = x$x,y = x$y,

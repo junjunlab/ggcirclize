@@ -80,7 +80,7 @@ arcTextGrob <- function(x = NULL,y = NULL,
 }
 
 
-#' @noRd
+#' @method makeContent arcTextGrob
 #' @export
 makeContent.arcTextGrob <- function(x){
   g <- .arcTextGrob(x = x$x,y = x$y,

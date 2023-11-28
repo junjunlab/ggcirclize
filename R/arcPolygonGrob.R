@@ -75,7 +75,7 @@ arcPolygonGrob <- function(x = NULL,y = NULL,
 }
 
 
-#' @noRd
+#' @method makeContent arcPolygonGrob
 #' @export
 makeContent.arcPolygonGrob <- function(x){
   g <- .arcPolygonGrob(x = x$x,y = x$y,

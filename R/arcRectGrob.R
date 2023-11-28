@@ -73,7 +73,7 @@ arcRectGrob <- function(xmin = NULL,xmax = NULL,
 }
 
 
-#' @noRd
+#' @method makeContent arcRectGrob
 #' @export
 makeContent.arcRectGrob <- function(x){
   g <- .arcRectGrob(xmin = x$xmin,xmax = x$xmax,
