@@ -1,4 +1,4 @@
-# ggcirclize <img src="data/ggcirclize_lg.tif" align="right" height="200" />
+# ggcirclize <img src="data/ggcirclize_lg.png" align="right" height="200" />
  
 
 <!-- badges: start -->
