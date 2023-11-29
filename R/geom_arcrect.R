@@ -85,8 +85,8 @@ GeomArcrect <- ggplot2::ggproto("GeomArcrect", ggplot2::Geom,
                                                            extend.yscale = extend.yscale,
                                                            clock.wise = unique(coords$clock.wise))
 
-                                  ggplot2::ggname("geom_arcrect",
-                                                  grid::gTree(children = gList(sector.grob,rect.grob)))
+                                  ggname("geom_arcrect",
+                                         grid::gTree(children = gList(sector.grob,rect.grob)))
                                 },
 
                                 draw_key = draw_key_rect

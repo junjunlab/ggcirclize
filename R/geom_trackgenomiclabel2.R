@@ -95,7 +95,13 @@ GeomTrackgenomiclabel2 <- ggproto("GeomTrackgenomiclabel2", Geom,
                                       tmp_data <- data[which(data$chr == gp[x]),]
 
                                       range.x <- range(0,sec_df$length[x])
-                                      range.th <- c(sec_df$sector_end[x],sec_df$sector_start[x])
+                                      # range.th <- c(sec_df$sector_end[x],sec_df$sector_start[x])
+
+                                      st <- sec_df$sector_start[x]
+                                      ed <- sec_df$sector_end[x]
+                                      st <- st + abs(ed - st)*extend.xscale
+                                      ed <- ed - abs(ed - st)*extend.xscale
+                                      range.th <- c(ed,st)
 
                                       tmp_data <- transform(tmp_data,mid = (gstart + gend)/2)
                                       tmp_data <- tmp_data[order(tmp_data$mid),]
