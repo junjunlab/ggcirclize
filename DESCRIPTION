@@ -66,6 +66,7 @@ Collate:
     'geom_trackgenomicarea.R'
     'geom_trackgenomicdensity.R'
     'geom_trackgenomiclabel.R'
+    'geom_trackgenomiclabel2.R'
     'geom_trackgenomicline.R'
     'geom_trackgenomiclink.R'
     'geom_trackgenomicpoint.R'

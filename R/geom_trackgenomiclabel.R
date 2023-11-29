@@ -103,12 +103,13 @@ GeomTrackgenomiclabel <- ggproto("GeomTrackgenomiclabel", Geom,
                                          range.th <- c(sec_df$sector_end[sec],sec_df$sector_start[sec])
 
                                          link_df <- unique(tmp_data[,c("chr","gstart","gend","label")])
-                                         link_df <- link_df[order(link_df$gstart),]
+                                         link_df <- transform(link_df,mid = (gstart + gend)/2)
+                                         link_df <- link_df[order(link_df$mid),]
                                          link_df$ht.x <- 1:nrow(link_df)
                                          link_df$ht.x.th <- rescale(link_df$ht.x,to = rev(range.th),
                                                                     from = c(min(link_df$ht.x) - 0.5,
                                                                              max(link_df$ht.x) + 0.5))
-                                         link_df <- transform(link_df,mid = (gstart + gend)/2)
+
                                          link_df$mid.th <- rescale(link_df$mid,to = rev(range.th),
                                                                    from = range.x)
 
@@ -246,7 +247,7 @@ GeomTrackgenomiclabel <- ggproto("GeomTrackgenomiclabel", Geom,
 
                                    }
 
-                                   ggname("geom_trackgenomictile",
+                                   ggname("geom_trackgenomiclabel",
                                           grid::gTree(children = gList(track_glist)))
                                  },
 

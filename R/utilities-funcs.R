@@ -51,6 +51,9 @@ download_chromInfo <- function(genome = "hg19"){
 
 
 
+#' @description
+#' A simple viewport to be created to plot arc graphics.
+#'
 #' @export
 #' @import grid
 newpage <- function(){
