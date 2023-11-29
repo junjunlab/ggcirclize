@@ -31,6 +31,7 @@ remotes::install_github("junjunlab/ggcirclize")
 
 ## News
 
+- 2023/11/29  (Adding **geom_trackgenomiclabel2** layer.)
 - 2023/11/26  (First version pushed.)
 ---
 
