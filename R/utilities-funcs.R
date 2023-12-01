@@ -63,3 +63,60 @@ newpage <- function(){
                         default.units = "snpc"))
   grid.circle(r = 0.5,gp = gpar(fill = "grey95",col = NA))
 }
+
+
+
+#' Calculate Height Between Arc Angles
+#'
+#' This function calculates the height between two arc angles based on the specified
+#' starting angle, ending angle, inner radius, and outer radius.
+#'
+#' @param start Starting angle in degrees.
+#' @param end Ending angle in degrees.
+#' @param r0 Inner radius.
+#' @param r1 Outer radius.
+#'
+#' @return The height between the specified arc angles.
+#'
+#' @export
+get_height <- function(start,end,r0,r1){
+  th <- abs(end - start)
+  if(th <= 180){
+    h <- rescale(th,to = c(r0,r1),from = c(0,180))
+  }else{
+    th <- th - 180
+    h <- rescale(th,to = c(r0,r1),from = c(0,180))
+    h <- abs(r1 - r0) + h
+
+  }
+  return(h)
+}
+
+
+#' Calculate Height for Fixed Arc Angle Span
+#'
+#' This function calculates the height for a fixed arc angle span based on the specified
+#' starting angle, ending angle, inner radius, outer radius, and height.
+#'
+#' @param start Starting angle in degrees.
+#' @param end Ending angle in degrees.
+#' @param r0 Inner radius.
+#' @param r1 Outer radius.
+#' @param height Fixed height (default: NULL).
+#'
+#' @return The calculated height for the specified arc angle span.
+#'
+#' @export
+get_fixedHeight <- function(start,end,r0,r1,height){
+  th <- abs(end - start)
+  if(th <= 180){
+    h <- height
+  }else{
+    if(height >= r0 & height < r1){
+      h <- abs(r1 - r0) + r1 - height
+    }else{
+      h <- height
+    }
+  }
+  return(h)
+}

@@ -29,6 +29,7 @@ LazyData: true
 Collate: 
     'arcAxisGrob.R'
     'arcLinesGrob.R'
+    'arcLinks2Grob.R'
     'arcLinksGrob.R'
     'arcPointGrob.R'
     'arcPolygonGrob.R'

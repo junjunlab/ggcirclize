@@ -118,8 +118,8 @@ makeContent.arcLinksGrob <- function(x){
     y <- scales::rescale(y,to = c(0,1),from = c(-1,1))
 
     # curve height with control points
-    xm <- x0 + abs(r - curve.height)*cos(as.radian((start + end)/2))
-    ym <- y0 + abs(r - curve.height)*sin(as.radian((start + end)/2))
+    xm <- x0 + (r - curve.height)*cos(as.radian((start + end)/2))
+    ym <- y0 + (r - curve.height)*sin(as.radian((start + end)/2))
 
     xm <- scales::rescale(xm,to = c(0,1),from = c(-1,1))
     ym <- scales::rescale(ym,to = c(0,1),from = c(-1,1))
@@ -160,8 +160,8 @@ makeContent.arcLinksGrob <- function(x){
     y <- y0 + bezier.r*sin(theta)
 
     # curve height with control points
-    xm <- x0 + abs(bezier.r - curve.height)*cos(as.radian((start[2] + end[1])/2))
-    ym <- y0 + abs(bezier.r - curve.height)*sin(as.radian((start[2] + end[1])/2))
+    xm <- x0 + (bezier.r - curve.height)*cos(as.radian((start[2] + end[1])/2))
+    ym <- y0 + (bezier.r - curve.height)*sin(as.radian((start[2] + end[1])/2))
 
     # bzgrob <- bezierGrob(c(x[1],x0,x0,x[2]),c(y[1],y0,y0,y[2]),default.units = "native")
     # bezier <- bezierPoints(bzgrob)
@@ -189,8 +189,8 @@ makeContent.arcLinksGrob <- function(x){
     y <- y0 + bezier.r*sin(theta)
 
     # curve height with control points
-    xm <- x0 + abs(bezier.r - curve.height)*cos(as.radian((end[2] + start[1])/2))
-    ym <- y0 + abs(bezier.r - curve.height)*sin(as.radian((end[2] + start[1])/2))
+    xm <- x0 + (bezier.r - curve.height)*cos(as.radian((end[2] + start[1])/2))
+    ym <- y0 + (bezier.r - curve.height)*sin(as.radian((end[2] + start[1])/2))
 
     # bzgrob <- bezierGrob(c(x[1],x0,x0,x[2]),c(y[1],y0,y0,y[2]),default.units = "native")
     # bezier <- bezierPoints(bzgrob)
