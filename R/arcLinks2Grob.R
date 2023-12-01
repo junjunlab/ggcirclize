@@ -113,10 +113,6 @@ makeContent.arcLinks2Grob <- function(x){
     xt <- scales::rescale(xt,to = c(0,1),from = c(-1,1))
     yt <- scales::rescale(yt,to = c(0,1),from = c(-1,1))
 
-    print(xf)
-    print(yf)
-    print(xt)
-    print(yt)
     # curve height with control points
     xm <- x0 + (r - curve.height)*cos(as.radian((start + end)/2))
     ym <- y0 + (r - curve.height)*sin(as.radian((start + end)/2))
