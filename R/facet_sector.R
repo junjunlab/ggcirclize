@@ -26,8 +26,8 @@ facet_sector <- function(data = NULL,
 
   # calculate theta pos for each sectors
   if(data.type == "genomic"){
-    secs <- data[,2]
-    names(secs) <- data[,1]
+    secs <- unlist(data[,2])
+    names(secs) <- unlist(data[,1])
   }else{
     if(!("sector" %in% colnames(data))){
       data$sector <- "sector"

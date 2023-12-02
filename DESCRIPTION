@@ -14,6 +14,7 @@ Imports:
     circlize,
     cli,
     DescTools,
+    dplyr,
     ggplot2,
     grid,
     lifecycle,
@@ -58,6 +59,7 @@ Collate:
     'geom_arctext.R'
     'geom_arctile.R'
     'geom_arcviolin.R'
+    'geom_chordDiagram.R'
     'geom_cpoint.R'
     'geom_trackarea.R'
     'geom_trackbar.R'
