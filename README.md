@@ -39,7 +39,7 @@ remotes::install_github("junjunlab/ggcirclize")
 
 ## Documentation
 
-Currently not be written.
+[https://junjunlab.github.io/ggcirclize-manual/.](https://junjunlab.github.io/ggcirclize-manual/)
 
 ---
 
