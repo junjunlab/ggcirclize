@@ -2,7 +2,7 @@
  
 <!-- badges: start -->
 
-**ggcirclize** is inspired by some circular plot R package and is designed to create circular graph with the grammar of ggplot2.
+**ggcirclize** is inspired by some circular plot R packages and is designed to create circular graph with the grammar of ggplot2.
 
 Logo is from **[Whole-genome comparison of two Campylobacter jejuni isolates of the same sequence type reveals multiple loci of different ancestral lineage. PLoS One. 2011](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0027121)**
 
@@ -32,6 +32,7 @@ remotes::install_github("junjunlab/ggcirclize")
 
 ## News
 
+- 2023/12/02  (Adding **geom_chordDiagram** layer.)
 - 2023/11/29  (Adding **geom_trackgenomiclabel2** layer.)
 - 2023/11/26  (First version pushed.)
 ---
