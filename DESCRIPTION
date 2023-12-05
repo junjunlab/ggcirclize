@@ -19,6 +19,7 @@ Imports:
     grid,
     lifecycle,
     magrittr,
+    reshape2,
     rlang,
     scales,
     tibble,

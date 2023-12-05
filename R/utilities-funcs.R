@@ -1,4 +1,4 @@
-globalVariables(c("."))
+globalVariables(c(".","value"))
 
 #' This function converts degrees to radians.
 #' @param degree Numeric vector or scalar containing angles in degrees.
@@ -154,4 +154,45 @@ get_symmetric_val <- function(mat = NULL,keep.diag = TRUE){
   mat_long$value <- as.numeric(mat_long$value)
 
   return(mat_long)
+}
+
+
+
+#' Convert a BED matrix to a long format
+#'
+#' This function converts a BED matrix into a long format data frame for further analysis.
+#'
+#' @param bed.mat A data frame containing BED format data with columns 'chr',
+#' 'start', and 'end'.
+#' @param retain.var A character vector of additional variables to retain in the
+#' long format data frame (optional).
+#'
+#' @return A long format data frame.
+#'
+#' @details This function orders the input BED matrix by chromosome
+#' and start position, and then creates a long format data frame with columns
+#' for chromosome, start, end, x-coordinate, variable, and y-coordinate.
+#'
+#' @export
+#'
+#' @seealso \code{\link{melt}}, \code{\link{order}}
+#'
+#' @importFrom reshape2 melt
+#'
+#' @rdname bedMatTolong
+bedMatTolong <- function(bed.mat = NULL,retain.var = NULL){
+  bed.mat <- bed.mat[order(bed.mat$chr,bed.mat$start),]
+  x <- as.numeric(unlist(lapply(table(bed.mat$chr), function(x) 1:x)))
+  bed.mat$x <- x
+
+  if(is.null(retain.var)){
+    id.vars <- c("chr","start","end","x")
+  }else{
+    id.vars <- c("chr","start","end","x",retain.var)
+  }
+
+  bed_long <- reshape2::melt(bed.mat,id.vars = id.vars)
+  bed_long$y <- as.numeric(bed_long$variable)
+
+  return(bed_long)
 }
