@@ -65,6 +65,18 @@ GeomTrackgenomicrainfall <- ggproto("GeomTrackgenomicrainfall", GeomArcpoint,
                                         label.r = unique(data$r0) - strip.label.space
                                       }
 
+                                      # whether add xy axis
+                                      if(length(add.xaxis) == 1){
+                                        add.xaxis <- rep(add.xaxis,nrow(sec_df))
+                                      }else{
+                                        add.xaxis <- add.xaxis
+                                      }
+
+                                      if(length(add.yaxis) == 1){
+                                        add.yaxis <- rep(add.yaxis,nrow(sec_df))
+                                      }else{
+                                        add.yaxis <- add.yaxis
+                                      }
                                       # ====================================================
                                       # calculate rainfall data
                                       chr <- unique(data$chr)
@@ -137,8 +149,8 @@ GeomTrackgenomicrainfall <- ggproto("GeomTrackgenomicrainfall", GeomArcpoint,
                                             extend.yscale = extend.yscale,
                                             add.bg = add.bg,
                                             sector.bg.extend = sector.bg.extend,
-                                            add.xaxis = add.xaxis,
-                                            add.yaxis = add.yaxis,
+                                            add.xaxis = add.xaxis[sec],
+                                            add.yaxis = add.yaxis[sec],
                                             xAxis.params = xAxis.params,
                                             yAxis.params = yAxis.params
                                           )

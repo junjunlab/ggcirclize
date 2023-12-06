@@ -29,12 +29,6 @@ GeomTracktile <- ggproto("GeomTracktile", GeomArctile,
                            scales <- match.arg(scales,c("fixed","free","free_x","free_y"))
                            space <- match.arg(space,c("free_x","fixed"))
 
-                           # print(head(data))
-                           # break
-
-                           # xlim <- range(data$xmin,data$xmax)
-                           # ylim <- range(data$ymin,data$ymax)
-
                            # calculate sector theta
                            sec_df = facet_sector(data = data,sector.gap = sector.gap,space = space)
 
@@ -49,6 +43,18 @@ GeomTracktile <- ggproto("GeomTracktile", GeomArctile,
                              label.r = unique(data$r0) - strip.label.space
                            }
 
+                           # whether add xy axis
+                           if(length(add.xaxis) == 1){
+                             add.xaxis <- rep(add.xaxis,nrow(sec_df))
+                           }else{
+                             add.xaxis <- add.xaxis
+                           }
+
+                           if(length(add.yaxis) == 1){
+                             add.yaxis <- rep(add.yaxis,nrow(sec_df))
+                           }else{
+                             add.yaxis <- add.yaxis
+                           }
                            # ====================================================
                            # loop draw grobs
                            gp <- sec_df$sector_name
@@ -151,16 +157,9 @@ GeomTracktile <- ggproto("GeomTracktile", GeomArctile,
                                }
                              }
 
-                             # print(new_panel_params)
-                             # break
-
                              tmp_data <- transform(tmp_data,
                                                    start = sec_df$sector_start[sec],
                                                    end = sec_df$sector_end[sec])
-
-                             # print(head(tmp_data))
-                             # print(yAxis.params)
-                             # break
 
                              if(strip.label == TRUE){
                                plabel <- arcTextGrob(x = 1,y = 1,
@@ -192,8 +191,8 @@ GeomTracktile <- ggproto("GeomTracktile", GeomArctile,
                                  extend.yscale = extend.yscale,
                                  add.bg = add.bg,
                                  sector.bg.extend = sector.bg.extend,
-                                 add.xaxis = add.xaxis,
-                                 add.yaxis = add.yaxis,
+                                 add.xaxis = add.xaxis[sec],
+                                 add.yaxis = add.yaxis[sec],
                                  xAxis.params = xAxis.params,
                                  yAxis.params = yAxis.params
                                )
