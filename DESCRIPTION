@@ -13,10 +13,12 @@ RoxygenNote: 7.2.3
 Imports: 
     circlize,
     cli,
+    ComplexHeatmap,
     DescTools,
     dplyr,
     ggplot2,
     grid,
+    gtable,
     lifecycle,
     magrittr,
     reshape2,
@@ -89,6 +91,7 @@ Collate:
     'geom_trackviolin.R'
     'ggcirclize-package.R'
     'ggcirclize.R'
+    'smartLabelAlignGrob.R'
     'utilities-funcs.R'
     'utilities-ggplot2.R'
     'utils-pipe.R'
