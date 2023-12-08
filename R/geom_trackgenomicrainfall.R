@@ -17,7 +17,7 @@ GeomTrackgenomicrainfall <- ggproto("GeomTrackgenomicrainfall", GeomArcpoint,
                                                           normalize_to_width = FALSE,
                                                           strip.label = TRUE,
                                                           strip.label.pos = c("top","bottom"),
-                                                          strip.label.space = 0.15,
+                                                          strip.label.space = 0.1,
                                                           strip.label.fontface = "bold",
                                                           strip.label.col = "black",
                                                           strip.label.size = 10,
@@ -38,6 +38,19 @@ GeomTrackgenomicrainfall <- ggproto("GeomTrackgenomicrainfall", GeomArcpoint,
                                       strip.label.pos <- match.arg(strip.label.pos,c("top","bottom"))
                                       scales <- match.arg(scales,c("fixed","free","free_x","free_y"))
                                       space <- match.arg(space,c("free_x","fixed"))
+
+                                      # fetch genome size data
+                                      if("genome" %in% colnames(data) & is.null(chrom_data)){
+                                        gm <- unique(data$genome)
+                                        if(gm %in% c("hg38","hg19","mm39","mm10","mm9")){
+                                          chrom_data <- get_chrom_data(genome = gm)
+                                        }else if(is.data.frame(get(gm))){
+                                          chrom_data <- get(gm)
+                                        }else{
+                                          message("Please supply a data frame includes chromsome length or
+                                               genome version(hg38,hg19,mm39,mm10,mm9).")
+                                        }
+                                      }
 
                                       # add start and end
                                       chrom_data <- transform(chrom_data,

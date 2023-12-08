@@ -64,6 +64,7 @@ Collate:
     'geom_arcviolin.R'
     'geom_chordDiagram.R'
     'geom_cpoint.R'
+    'geom_genomicNestedZoom.R'
     'geom_trackarea.R'
     'geom_trackbar.R'
     'geom_trackboxplot.R'

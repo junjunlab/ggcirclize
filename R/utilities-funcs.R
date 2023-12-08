@@ -1,4 +1,5 @@
-globalVariables(c(".","value"))
+globalVariables(c(".","value","hg38_chrom_info","hg19_chrom_info","mm39_chrom_info",
+                  "mm10_chrom_info","mm9_chrom_info"))
 
 #' This function converts degrees to radians.
 #' @param degree Numeric vector or scalar containing angles in degrees.
@@ -302,4 +303,34 @@ addMarkers <- function(object = NULL,
   grid.newpage()
   pushViewport(viewport(width = 0.9,height = 0.9))
   grid.draw(gt)
+}
+
+
+
+
+#' Fetch chromosome size from ggcirclize package
+#'
+#' @param genome Genome version includes hg38,hg19,mm39,mm10 or mm9.
+#'
+#' @return A 2-column data.frame includes chromosome length.
+#' @export
+get_chrom_data <- function(genome = "hg19"){
+  if(genome == "hg38"){
+    hg38_chrom_info <- ggcirclize::hg38_chrom_info
+    chr_df <- hg38_chrom_info$chromsize
+  }else if(genome == "hg19"){
+    hg19_chrom_info <- ggcirclize::hg19_chrom_info
+    chr_df <- hg19_chrom_info$chromsize
+  }else if(genome == "mm39"){
+    mm39_chrom_info <- ggcirclize::mm39_chrom_info
+    chr_df <- mm39_chrom_info$chromsize
+  }else if(genome == "mm10"){
+    mm10_chrom_info <- ggcirclize::mm10_chrom_info
+    chr_df <- mm10_chrom_info$chromsize
+  }else if(genome == "mm9"){
+    mm9_chrom_info <- ggcirclize::mm9_chrom_info
+    chr_df <- mm9_chrom_info$chromsize
+  }else{
+    message("Please supply genome version which in hg38,hg19,mm39,mm10 or mm9.")
+  }
 }
