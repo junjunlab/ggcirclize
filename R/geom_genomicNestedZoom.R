@@ -27,7 +27,7 @@ GeomGenomicNestedZoom <- ggproto("GeomGenomicNestedZoom", Geom,
                                                        chrom_data = NULL,
                                                        keep.all.chrom = FALSE,
                                                        zoom_data = NULL,
-                                                       geom = c("point","line","rect","area","rainfall","density"),
+                                                       geom = c("point","line","rect","tile","area","rainfall","density"),
                                                        extend.start = 0,
                                                        extend.end = 0,
                                                        nested.r = 0.02,
@@ -70,7 +70,7 @@ GeomGenomicNestedZoom <- ggproto("GeomGenomicNestedZoom", Geom,
                                    strip.label.pos <- match.arg(strip.label.pos,c("top","bottom"))
                                    scales <- match.arg(scales,c("fixed","free","free_x","free_y"))
                                    space <- match.arg(space,c("free_x","fixed"))
-                                   geom <- match.arg(geom,c("point","line","rect","area","rainfall","density"))
+                                   geom <- match.arg(geom,c("point","line","rect","tile","area","rainfall","density"))
 
                                    # fetch genome size data
                                    if("genome" %in% colnames(data) & is.null(chrom_data)){
@@ -576,7 +576,7 @@ geom_genomicNestedZoom <- function(mapping = NULL, data = NULL,
                                    chrom_data = NULL,
                                    keep.all.chrom = FALSE,
                                    zoom_data = NULL,
-                                   geom = c("point","line","rect","area","rainfall","density"),
+                                   geom = c("point","line","rect","tile","area","rainfall","density"),
                                    extend.start = 0,
                                    extend.end = 0,
                                    nested.r = 0.02,
