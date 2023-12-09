@@ -15,7 +15,7 @@ geom_genomicNestedZoom(
   chrom_data = NULL,
   keep.all.chrom = FALSE,
   zoom_data = NULL,
-  geom = c("point", "line", "rect", "area", "rainfall", "density"),
+  geom = c("point", "line", "rect", "tile", "area", "rainfall", "density"),
   extend.start = 0,
   extend.end = 0,
   nested.r = 0.02,
