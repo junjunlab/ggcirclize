@@ -12,7 +12,7 @@ GeomTrackgenomiclabel2 <- ggproto("GeomTrackgenomiclabel2", Geom,
                                     start = 0,end = 180,r0 = 0.5,r1 = 1,
                                     clock.wise = FALSE,
                                     colour = "black",linewidth = .5,
-                                    linetype = 1,size = 10,
+                                    linetype = 1,size = 3,
                                     sector.bg.fill = "grey95",
                                     sector.bg.col = "black",
                                     sector.bg.lty = 1,
@@ -41,7 +41,8 @@ GeomTrackgenomiclabel2 <- ggproto("GeomTrackgenomiclabel2", Geom,
                                                         add.xaxis = FALSE,
                                                         add.yaxis = FALSE,
                                                         xAxis.params = list(),
-                                                        yAxis.params = list()) {
+                                                        yAxis.params = list(),
+                                                        size.unit = "mm") {
 
                                     link_pos <- match.arg(link_pos,c("top","bottom"))
 
@@ -89,6 +90,7 @@ GeomTrackgenomiclabel2 <- ggproto("GeomTrackgenomiclabel2", Geom,
                                       label.r = unique(data$r0) - strip.label.space
                                     }
 
+                                    size.unit <- resolve_text_unit(size.unit)
                                     # ====================================================
                                     # link color
                                     if(is.null(link_col)){
@@ -227,7 +229,7 @@ GeomTrackgenomiclabel2 <- ggproto("GeomTrackgenomiclabel2", Geom,
                                                                 inward = inward,
                                                                 nice.facing = FALSE,
                                                                 text.gp = gpar(col = tmp$colour,
-                                                                               fontsize = tmp$size),
+                                                                               fontsize = tmp$size * size.unit),
                                                                 start = tmp$mid.th.new,end = tmp$mid.th.new)
 
                                       connection_list <- gList(connection_list,

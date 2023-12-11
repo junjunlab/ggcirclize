@@ -16,7 +16,7 @@ GeomTrackgenomiclabel <- ggproto("GeomTrackgenomiclabel", Geom,
                                                        link_r = 0.1,
                                                        link_col = NULL,
                                                        label.col = NULL,
-                                                       label.size = 10,
+                                                       label.size = 3,
                                                        strip.label = TRUE,
                                                        strip.label.pos = c("top","bottom"),
                                                        strip.label.space = 0.1,
@@ -33,7 +33,8 @@ GeomTrackgenomiclabel <- ggproto("GeomTrackgenomiclabel", Geom,
                                                        add.xaxis = FALSE,
                                                        add.yaxis = FALSE,
                                                        xAxis.params = list(),
-                                                       yAxis.params = list()) {
+                                                       yAxis.params = list(),
+                                                       size.unit = "mm") {
 
                                    link_pos <- match.arg(link_pos,c("top","bottom"))
 
@@ -81,6 +82,7 @@ GeomTrackgenomiclabel <- ggproto("GeomTrackgenomiclabel", Geom,
                                      label.r = unique(data$r0) - strip.label.space
                                    }
 
+                                   size.unit <- resolve_text_unit(size.unit)
                                    # ====================================================
                                    # link color
                                    if(is.null(link_col)){
@@ -244,7 +246,7 @@ GeomTrackgenomiclabel <- ggproto("GeomTrackgenomiclabel", Geom,
                                                             nice.facing = FALSE,
                                                             inward = inward,
                                                             text.gp = gpar(col = label.col[sec],
-                                                                           fontsize = label.size),
+                                                                           fontsize = label.size * size.unit),
                                                             extend.xscale = extend.xscale,
                                                             extend.yscale = extend.yscale,
                                                             clock.wise = unique(tmp_data$clock.wise),
@@ -325,7 +327,7 @@ geom_trackgenomiclabel <- function(mapping = NULL, data = NULL,
                                    link_r = 0.1,
                                    link_col = NULL,
                                    label.col = NULL,
-                                   label.size = 10,
+                                   label.size = 3,
                                    strip.label = TRUE,
                                    strip.label.pos = c("top","bottom"),
                                    strip.label.space = 0.15,

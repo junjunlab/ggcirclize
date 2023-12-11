@@ -831,3 +831,17 @@ vec_type_friendly <- function(x, length = FALSE) {
     add_length(out)
   }
 }
+
+
+
+resolve_text_unit <- function(unit) {
+  unit <- arg_match0(unit, c("mm", "pt", "cm", "in", "pc"))
+  switch(
+    unit,
+    "mm" = .pt,
+    "cm" = .pt * 10,
+    "in" = 72.27,
+    "pc" = 12,
+    1
+  )
+}

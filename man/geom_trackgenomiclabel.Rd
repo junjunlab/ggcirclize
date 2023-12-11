@@ -19,7 +19,7 @@ geom_trackgenomiclabel(
   link_r = 0.1,
   link_col = NULL,
   label.col = NULL,
-  label.size = 10,
+  label.size = 3,
   strip.label = TRUE,
   strip.label.pos = c("top", "bottom"),
   strip.label.space = 0.15,
