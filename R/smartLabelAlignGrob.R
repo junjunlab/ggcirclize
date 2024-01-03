@@ -125,9 +125,9 @@ makeContent.smartLabelAlignGrob <- function(x){
   if(use.smartAlign2 == TRUE){
     lapply(seq_along(idx), function(ii){
       if(pos %in% c("left","right")){
-        pushViewport(viewport(xscale = c(0,1),
-                              yscale = c(0.5,length(all.label) + 0.5)
-        ))
+        # pushViewport(viewport(xscale = c(0,1),
+        #                       yscale = c(0.5,length(all.label) + 0.5)
+        # ))
 
         label.g <- textGrob(label = mark.label[ii],
                             x = x,y = idx[ii],
@@ -142,9 +142,9 @@ makeContent.smartLabelAlignGrob <- function(x){
 
         data.frame(ymin = as.numeric(ymin),ymax = as.numeric(ymax))
       }else if(pos %in% c("top","bottom")){
-        pushViewport(viewport(yscale = c(0,1),
-                              xscale = c(0.5,length(all.label) + 0.5)
-        ))
+        # pushViewport(viewport(yscale = c(0,1),
+        #                       xscale = c(0.5,length(all.label) + 0.5)
+        # ))
         label.g <- textGrob(label = mark.label[ii],
                             x = idx[ii],y = y,
                             gp = link.label.gp,

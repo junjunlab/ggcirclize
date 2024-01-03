@@ -1,6 +1,6 @@
 Package: ggcirclize
 Title: Create Circular Elegant Visualisations Using the Grammar of Ggplot2
-Version: 0.0.1
+Version: 0.0.2
 Author: Jun Zhang
 Maintainer: Jun Zhang <3219030654@stu.cpu.edu.cn>
 BugReports: https://github.com/junjunlab/ggcirclize/issues
@@ -31,6 +31,7 @@ Depends:
     R (>= 2.10)
 LazyData: true
 Collate: 
+    'arcArrowGrob.R'
     'arcAxisGrob.R'
     'arcLinesGrob.R'
     'arcLinks2Grob.R'
@@ -45,6 +46,7 @@ Collate:
     'facet_sector.R'
     'geom_arcribbon.R'
     'geom_arcarea.R'
+    'geom_arcarrow.R'
     'geom_arcrect.R'
     'geom_arcbar.R'
     'geom_arcboxplot.R'
