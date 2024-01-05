@@ -109,8 +109,9 @@ GeomTrackgenomicarea <- ggproto("GeomTrackgenomicarea", GeomArcpolygon,
 
                                       # setting x axis
                                       x.range <- range(0,sec_df$length[sec])
-                                      breaks <- grid.pretty(x.range,n = 2)
-                                      breaks.label <- paste0(breaks/10^6,"Mb")
+                                      breaks <- grid.pretty(x.range,n = 3)
+                                      # breaks.label <- paste0(breaks/10^6,"Mb")
+                                      breaks.label <- addsuffix(breaks)
                                       xAxis.params.tmp <- list(xscale = x.range,
                                                                breaks = breaks,
                                                                breaks.label = breaks.label,

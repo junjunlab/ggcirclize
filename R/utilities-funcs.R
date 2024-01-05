@@ -21,6 +21,21 @@ as.theta <- function(radian) {
 }
 
 
+# add suitble suffix for a value
+addsuffix <- function(value = NULL){
+  fun <- function(val){
+    if(val <= 10^3){
+      labels <- paste0(val,"bp")
+    }else if(val >= 10^3 & val <= 10^6){
+      labels <- paste0(val/10^3,"Kb")
+    }else{
+      labels <- paste0(val/10^6,"Mb")
+    }
+  }
+
+  sapply(value,FUN = fun)
+}
+
 #' Download Chromosome Information Data
 #'
 #' This function downloads chromosome size and cytoband data for a specified
