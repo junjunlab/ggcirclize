@@ -56,6 +56,17 @@ automatically.
 
 ---
 
+## Documentation
+
+The reference manual is built with Sphinx and hosted on Read the Docs:
+
+- English site: [https://ggcirclize.readthedocs.io/](https://ggcirclize.readthedocs.io/)
+
+The old bookdown manual ([https://junjunlab.github.io/ggcirclize-manual/](https://junjunlab.github.io/ggcirclize-manual/)) is kept
+for the 0.0.2 release and will no longer be updated.
+
+---
+
 ## Quick start
 
 ```r
@@ -193,17 +204,6 @@ sectors through `chrom_data`:
 ### 0.0.1
 
 - 2023/11/26  (First version pushed.)
-
----
-
-## Documentation
-
-The reference manual is built with Sphinx and hosted on Read the Docs:
-
-- English site: [https://ggcirclize.readthedocs.io/](https://ggcirclize.readthedocs.io/)
-
-The old bookdown manual ([https://junjunlab.github.io/ggcirclize-manual/](https://junjunlab.github.io/ggcirclize-manual/)) is kept
-for the 0.0.2 release and will no longer be updated.
 
 ---
 
