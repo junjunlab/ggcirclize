@@ -312,3 +312,15 @@ clock.wise = TRUE    整体镜像（2*pi - angle）
 
 * 图形外观除上述位置错误（`arcAxisGrob` 次刻度、多组箱线图顶点顺序）外保持不变。
 * `geom_trackviolin(stat = "arcydensity")` 若曾显式传参，请改为 `stat = "ydensity"`。
+
+## 文档：bookdown 手册迁移到 Sphinx + Read the Docs
+
+* 原 bookdown 手册（<https://junjunlab.github.io/ggcirclize-manual/>）改写为
+  **Sphinx + MyST Markdown + sphinx-book-theme**，源码放在包内 `docs/`，
+  由 Read the Docs 自动构建：<https://ggcirclize.readthedocs.io/>。
+* 章节结构保持不变（安装、快速开始、坐标系与分面、各图层族、基因组图层等），
+  并补齐 0.0.3 新增参数（`link_pos`、`nested_fill`、`labels.facing` 等）的说明。
+* 新增 `.readthedocs.yaml`（`sphinx.configuration: docs/conf.py`）与
+  `docs/requirements.txt`；`.Rbuildignore` 排除 `^docs$` 与 `^\.readthedocs\.yaml$`，
+  保证安装包体积不变。
+* 启动信息 `R/zzz.R` 与 `DESCRIPTION` 的文档地址同步指向 Read the Docs。

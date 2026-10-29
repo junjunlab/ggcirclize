@@ -6,7 +6,7 @@
   ", pkgname, " version ", version, "
 
   Github page: https://github.com/junjunlab/ggcirclize
-  Documentation: https://junjunlab.github.io/ggcirclize-manual/
+  Documentation: https://ggcirclize.readthedocs.io/
 
   The ggcirclize is currently on developing.
   We strongly recommend that you do not rely on this for production, but,

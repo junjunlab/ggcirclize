@@ -30,16 +30,36 @@ remotes::install_github("junjunlab/ggcirclize")
 
 ## News
 
+### 0.0.3
+
+- 2026/10/29  (文档迁移至 **Sphinx + Read the Docs**，替换原来的 bookdown 手册。)
+- 2026/10/29  (修复包在 **ggplot2 4.x** 下完全不可用的问题：`...` 传参、`mapping` 类丢失、`expand` 语义。)
+- 2026/10/29  (恢复 0.0.2 误删的 **StatArcbar** / **StatArcboxplot** / **StatArcdensity**，修复 `geom_arcbar()`、`geom_trackbar()`、`geom_trackboxplot()`、`geom_trackdensity()` 调用即报错。)
+- 2026/10/29  (**geom_trackgenomiclabel** / **geom_trackgenomiclabel2** 重做标签排布与连接线，与手册示例图一致；外圈 chr 标签统一沿弧方向。)
+- 2026/10/29  (文字与坐标轴对齐 circlize：统一 `arc_theta()` 角度映射、`facing` 全套语义、重写 **arcAxisGrob**。)
+- 2026/10/29  (新增 `tests/smoke.R` 回归测试，覆盖 60+ 图层/grob/工具函数。)
+
+### 0.0.2
+
 - 2023/12/08  (Adding **geom_genomicNestedZoom** layer to visualize zoomed plot regions.)
 - 2023/12/06  (Adding **geom_tracktile2** and **geom_trackgenomictile2** layers.)
 - 2023/12/02  (Adding **geom_chordDiagram** layer.)
 - 2023/11/29  (Adding **geom_trackgenomiclabel2** layer.)
+
+### 0.0.1
+
 - 2023/11/26  (First version pushed.)
+
 ---
 
 ## Documentation
 
-[https://junjunlab.github.io/ggcirclize-manual/.](https://junjunlab.github.io/ggcirclize-manual/)
+The reference manual is built with Sphinx and hosted on Read the Docs:
+
+- English site: [https://ggcirclize.readthedocs.io/](https://ggcirclize.readthedocs.io/)
+
+The old bookdown manual ([https://junjunlab.github.io/ggcirclize-manual/](https://junjunlab.github.io/ggcirclize-manual/)) is kept
+for the 0.0.2 release and will no longer be updated.
 
 ---
 

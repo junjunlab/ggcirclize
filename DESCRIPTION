@@ -3,6 +3,8 @@ Title: Create Circular Elegant Visualisations Using the Grammar of Ggplot2
 Version: 0.0.3
 Author: Jun Zhang
 Maintainer: Jun Zhang <3219030654@stu.cpu.edu.cn>
+URL: https://github.com/junjunlab/ggcirclize,
+    https://ggcirclize.readthedocs.io/
 BugReports: https://github.com/junjunlab/ggcirclize/issues
 Description: It's aiming to extend circular plot in ggplot2 visualisation systerm with
   the grammar of ggplot2.
