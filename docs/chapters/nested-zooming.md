@@ -27,7 +27,7 @@ ggcirclize(bed,aes(end = 360,r0 = 0.8,r1 = 1,
                    genome = "hg19")) +
   geom_genomicNestedZoom(zoom_data = zoom)
 ```
-![](../images/176.png)
+![](../images/176.jpg)
 
 Add origin point layer:
 
@@ -40,7 +40,7 @@ ggcirclize(bed,aes(end = 360,r0 = 0.8,r1 = 1,
   geom_trackgenomicpoint(add.xaxis = F) +
   geom_genomicNestedZoom(zoom_data = zoom)
 ```
-![](../images/177.png)
+![](../images/177.jpg)
 
 **zoom.free.sec** can free the zoomed sector size rather than fixed size which is restricted by their
 origin sector:
@@ -55,7 +55,7 @@ ggcirclize(bed,aes(end = 360,r0 = 0.8,r1 = 1,
   geom_genomicNestedZoom(zoom_data = zoom,nested_fill = rand_color(24),
                          zoom.free.sec = T)
 ```
-![](../images/178.png)
+![](../images/178.jpg)
 
 Adjust the zoom sector gap space:
 
@@ -70,7 +70,7 @@ ggcirclize(bed,aes(end = 360,r0 = 0.8,r1 = 1,
                          zoom.free.sec = T,
                          sub.zoom.gap = 3)
 ```
-![](../images/179.png)
+![](../images/179.jpg)
 
 Extend the sector start and end degree:
 
@@ -86,7 +86,7 @@ ggcirclize(bed,aes(end = 360,r0 = 0.8,r1 = 1,
                          extend.start = 5,
                          extend.end = 5)
 ```
-![](../images/180.png)
+![](../images/180.jpg)
 
 Adjust the zoom track position:
 
@@ -105,7 +105,7 @@ ggcirclize(bed,aes(end = 360,r0 = 0.5,r1 = 0.7,
                          zoom_pos = "top",
                          nested_fill = rand_color(24))
 ```
-![](../images/181.png)
+![](../images/181.jpg)
 
 
 ## Zooming with other layers
@@ -120,7 +120,7 @@ ggcirclize(bed,aes(end = 360,r0 = 0.8,r1 = 1,
   geom_trackgenomicline(add.xaxis = F) +
   geom_genomicNestedZoom(zoom_data = zoom)
 ```
-![](../images/182.png)
+![](../images/182.jpg)
 
 
 
@@ -136,7 +136,7 @@ ggcirclize(bed,aes(end = 360,r0 = 0.8,r1 = 1,
   geom_trackgenomicpoint(aes(r0 = 0.4,r1 = 0.5),
                          add.xaxis = F,show.legend = F,strip.label = F)
 ```
-![](../images/183.png)
+![](../images/183.jpg)
 
 **geom_trackgenomicarea**:
 
@@ -149,7 +149,7 @@ ggcirclize(bed,aes(end = 360,r0 = 0.8,r1 = 1,
   geom_genomicNestedZoom(zoom_data = zoom,color = "black",show.legend = F,
                          geom = "area")
 ```
-![](../images/184.png)
+![](../images/184.jpg)
 
 **geom_trackgenomicrect**:
 
@@ -165,7 +165,7 @@ ggcirclize(cytoband_hg19,
   geom_genomicNestedZoom(zoom_data = zoom,color = "black",
                          geom = "rect")
 ```
-![](../images/185.png)
+![](../images/185.jpg)
 
 **geom_trackgenomictile**:
 
@@ -181,4 +181,4 @@ ggcirclize(bed_long,aes(end = 360,r0 = 0.6,r1 = 0.8,
   scale_fill_gradient2(low = "green",mid = "white",high = "red",midpoint = 0) +
   geom_genomicNestedZoom(zoom_data = zoom,geom = "tile",color = NA)
 ```
-![](../images/186.png)
+![](../images/186.jpg)

@@ -60,4 +60,4 @@ ggcirclize(cytoband_hg38,
                                       keep.all.chrom = T,
                                       strip.label = F)
 ```
-![](../images/187.png)
+![](../images/187.jpg)

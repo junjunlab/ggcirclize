@@ -22,7 +22,7 @@ ggcirclize(data = mtcars,
            mapping = aes(x = mpg,y = disp)) +
   geom_arcpoint()
 ```
-![](../images/35.png)
+![](../images/35.jpg)
 
 Mapping with colors:
 
@@ -31,7 +31,7 @@ ggcirclize(data = mtcars,
            mapping = aes(x = mpg,y = disp,end = 270)) +
   geom_arcpoint(aes(color = factor(cyl)))
 ```
-![](../images/36.png)
+![](../images/36.jpg)
 
 You can adjust the axis settings with **yAxis.params** and **xAxis.params**:
 
@@ -41,7 +41,7 @@ ggcirclize(data = mtcars,
   geom_arcpoint(yAxis.params = list(yscale = c(100,800)),
                 xAxis.params = list(xscale = c(-50,100)))
 ```
-![](../images/37.png)
+![](../images/37.jpg)
 
 
 Mapping with size and color:
@@ -52,7 +52,7 @@ ggcirclize(data = mtcars,
                          color = as.character(cyl),size = qsec)) +
   geom_arcpoint()
 ```
-![](../images/38.png)
+![](../images/38.jpg)
 
 
 Mapping with gradient color:
@@ -64,7 +64,7 @@ ggcirclize(data = mtcars,
   geom_arcpoint(end = 270,r0 = 0.3,r1 = 0.8) +
   scale_color_gradient(low = "blue",high = "red")
 ```
-![](../images/39.png)
+![](../images/39.jpg)
 
 
 Control the background graphic settings:
@@ -75,7 +75,7 @@ ggcirclize(data = mtcars,mapping = aes(x = mpg,y = disp)) +
                 sector.bg.lty = "dashed",
                 sector.bg.lwd = 2)
 ```
-![](../images/40.png)
+![](../images/40.jpg)
 
 
 ## geom_arcsegment
@@ -92,7 +92,7 @@ df <- data.frame(x = c(rep(0,4),0:4),x1 = c(rep(4,4),0:4),
 ggcirclize(df) +
   geom_arcsegment(aes(xmin = x,xmax = x1,ymin = y,ymax = y1))
 ```
-![](../images/41.png)
+![](../images/41.jpg)
 
 Add arrows:
 
@@ -102,7 +102,7 @@ ggcirclize(df) +
                       color = g),linewidth = 3,
                   arrow = arrow(type = "closed"))
 ```
-![](../images/42.png)
+![](../images/42.jpg)
 
 ## geom_arcline
 
@@ -114,7 +114,7 @@ ggcirclize(df) +
 ggcirclize(mtcars,aes(mpg,disp,color = factor(cyl))) +
   geom_arcline(linewidth = 5)
 ```
-![](../images/43.png)
+![](../images/43.jpg)
 
 ## geom_arcpath
 
@@ -128,7 +128,7 @@ df <- data.frame(x = 1:3, y = c(4, 1, 9))
 ggplot(df, aes(x, y)) +
   geom_path(linewidth = 10)
 ```
-![](../images/44.png)
+![](../images/44.jpg)
 
 See what **geom_arcpath** output:
 
@@ -136,7 +136,7 @@ See what **geom_arcpath** output:
 ggcirclize(df, aes(x, y)) +
   geom_arcpath(linewidth = 10)
 ```
-![](../images/45.png)
+![](../images/45.jpg)
 
 
 ```r
@@ -151,14 +151,14 @@ df <- data.frame(
 ggplot(df, aes(x=x, y=y, group=group)) +
   geom_line(aes(colour = group), linetype = 2)
 ```
-![](../images/46.png)
+![](../images/46.jpg)
 
 
 ```r
 ggcirclize(df, aes(x=x, y=y, group = group,color = group)) +
   geom_arcpath(linetype = 2)
 ```
-![](../images/47.png)
+![](../images/47.jpg)
 
 
 ## geom_arcpolygon
@@ -191,7 +191,7 @@ datapoly <- merge(values, positions, by = c("id"))
 ggplot(datapoly, aes(x = x, y = y)) +
   geom_polygon(aes(fill = value, group = id))
 ```
-![](../images/48.png)
+![](../images/48.jpg)
 
 **geom_arcpolygon** outputs:
 
@@ -199,7 +199,7 @@ ggplot(datapoly, aes(x = x, y = y)) +
 ggcirclize(datapoly, aes(x = x, y = y)) +
   geom_arcpolygon(aes(fill = value, group = id))
 ```
-![](../images/49.png)
+![](../images/49.jpg)
 
 The **id** is used to distinguish the groups:
 
@@ -211,7 +211,7 @@ df <- data.frame(x = c(0.1,0.2,0.3,0.4,0.5,0.4,0.7,0.6,0.7),
 ggcirclize(df, aes(x = x, y = y)) +
   geom_arcpolygon(aes(group = id))
 ```
-![](../images/50.png)
+![](../images/50.jpg)
 
 ```r
 d=data.frame(x=c(1,2,2, 3,4,4), y=c(1,1,2, 2,2,3),
@@ -221,7 +221,7 @@ d=data.frame(x=c(1,2,2, 3,4,4), y=c(1,1,2, 2,2,3),
 ggcirclize(d, aes(x = x, y = y)) +
   geom_arcpolygon(aes(id = t))
 ```
-![](../images/51.png)
+![](../images/51.jpg)
 
 
 ## geom_arcrect
@@ -244,7 +244,7 @@ df <- df %>% mutate(xmin = x - w / 2, xmax = x + w / 2, ymin = y, ymax = y + 1)
 ggplot(df, aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax)) +
   geom_rect(aes(fill = z), colour = "grey50")
 ```
-![](../images/52.png)
+![](../images/52.jpg)
 
 
 
@@ -252,7 +252,7 @@ ggplot(df, aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax)) +
 ggcirclize(df,aes(xmin = xmin,xmax = xmax,ymin = ymin,ymax = ymax)) +
   geom_arcrect()
 ```
-![](../images/53.png)
+![](../images/53.jpg)
 
 Mapping with color:
 
@@ -261,7 +261,7 @@ ggcirclize(df,aes(xmin = xmin,xmax = xmax,ymin = ymin,ymax = ymax)) +
   geom_arcrect(aes(fill = z))
 
 ```
-![](../images/54.png)
+![](../images/54.jpg)
 
 ## geom_arctile
 
@@ -281,14 +281,14 @@ ggplot(mat.long,aes(x = Var1,y = Var2,fill = value)) +
   scale_fill_gradient2(low = "green",mid = "black",high = "red",midpoint = 0) +
   theme(axis.text.x = element_text(angle = 90,hjust = 1,vjust = 0.5))
 ```
-![](../images/55.png)
+![](../images/55.jpg)
 
 ```r
 ggcirclize(mat.long,aes(x = Var1,y = Var2,fill = value),mg.t = 2.5) +
   geom_arctile() +
   scale_fill_gradient2(low = "green",mid = "black",high = "red",midpoint = 0)
 ```
-![](../images/56.png)
+![](../images/56.jpg)
 
 
 Adjust the width and height:
@@ -298,7 +298,7 @@ ggcirclize(mat.long,aes(x = Var1,y = Var2,fill = value)) +
   geom_arctile(width = 0.5,height = 0.5) +
   scale_fill_gradient2(low = "green",mid = "black",high = "red",midpoint = 0)
 ```
-![](../images/57.png)
+![](../images/57.jpg)
 
 ## geom_arcbar
 
@@ -310,33 +310,33 @@ ggcirclize(mat.long,aes(x = Var1,y = Var2,fill = value)) +
 ggplot(mpg, aes(class)) +
   geom_bar()
 ```
-![](../images/58.png)
+![](../images/58.jpg)
 
 
 ```r
 ggcirclize(mpg,aes(x = class)) +
   geom_arcbar(width = 0.5)
 ```
-![](../images/59.png)
+![](../images/59.jpg)
 
 ```r
 ggcirclize(mpg,aes(x = class,fill = drv)) +
   geom_arcbar()
 ```
-![](../images/60.png)
+![](../images/60.jpg)
 
 
 ```r
 ggplot(mpg, aes(class,fill = drv)) +
   geom_bar(position = position_dodge2())
 ```
-![](../images/61.png)
+![](../images/61.jpg)
 
 ```r
 ggcirclize(mpg,aes(x = class,fill = drv)) +
   geom_arcbar(position = position_dodge2())
 ```
-![](../images/62.png)
+![](../images/62.jpg)
 
 
 ## geom_arccol
@@ -354,13 +354,13 @@ df2 <- data.frame(supp=rep(c("VC", "OJ"), each=3),
 ggplot(df2, aes(x = dose, y = len)) +
   geom_col(aes(fill = supp), position = position_stack())
 ```
-![](../images/63.png)
+![](../images/63.jpg)
 
 ```r
 ggcirclize(df2,aes(x = dose, y = len)) +
   geom_arccol(aes(fill = supp), position = position_stack())
 ```
-![](../images/64.png)
+![](../images/64.jpg)
 
 
 
@@ -368,13 +368,13 @@ ggcirclize(df2,aes(x = dose, y = len)) +
 ggplot(df2, aes(x = dose, y = len)) +
   geom_col(aes(fill = supp), position = position_dodge2())
 ```
-![](../images/65.png)
+![](../images/65.jpg)
 
 ```r
 ggcirclize(df2,aes(x = dose, y = len)) +
   geom_arccol(aes(fill = supp), position = position_dodge2())
 ```
-![](../images/66.png)
+![](../images/66.jpg)
 
 
 ## geom_arcribbon
@@ -391,14 +391,14 @@ huron$g <- sample(letters[1:3],98,replace = T)
 ggplot(huron, aes(year)) +
   geom_ribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70")
 ```
-![](../images/67.png)
+![](../images/67.jpg)
 
 
 ```r
 ggcirclize(huron, aes(x = year)) +
   geom_arcribbon(aes(ymin = level - 1, ymax = level + 1), fill = "grey70")
 ```
-![](../images/68.png)
+![](../images/68.jpg)
 
 ## geom_arcviolin
 
@@ -410,13 +410,13 @@ ggcirclize(huron, aes(x = year)) +
 ggplot(mtcars, aes(factor(cyl), mpg)) +
   geom_violin()
 ```
-![](../images/69.png)
+![](../images/69.jpg)
 
 ```r
 ggcirclize(mtcars, aes(factor(cyl), mpg)) +
   geom_arcviolin()
 ```
-![](../images/70.png)
+![](../images/70.jpg)
 
 Horizontal violin:
 
@@ -424,14 +424,14 @@ Horizontal violin:
 ggcirclize(mtcars, aes(x = mpg,y = factor(cyl))) +
   geom_arcviolin()
 ```
-![](../images/71.png)
+![](../images/71.jpg)
 Turn off **trim**:
 
 ```r
 ggcirclize(mtcars, aes(factor(cyl), mpg)) +
   geom_arcviolin(trim = FALSE)
 ```
-![](../images/72.png)
+![](../images/72.jpg)
 
 Mapping with color:
 
@@ -439,7 +439,7 @@ Mapping with color:
 ggcirclize(mtcars, aes(factor(cyl), mpg)) +
   geom_arcviolin(aes(fill = factor(cyl)))
 ```
-![](../images/73.png)
+![](../images/73.jpg)
 
 Multiple groups:
 
@@ -447,7 +447,7 @@ Multiple groups:
 ggcirclize(mtcars, aes(factor(cyl), mpg)) +
   geom_arcviolin(aes(fill = factor(am)))
 ```
-![](../images/74.png)
+![](../images/74.jpg)
 
 Draw quantiles:
 
@@ -456,7 +456,7 @@ ggcirclize(mtcars, aes(factor(cyl), mpg)) +
   geom_arcviolin(draw_quantiles = c(0.25, 0.5, 0.75),
                  polar.every = T)
 ```
-![](../images/75.png)
+![](../images/75.jpg)
 Multiple violins:
 
 ```r
@@ -468,7 +468,7 @@ ggcirclize(dbox, aes(x, y,start = 0,end = 360)) +
                  draw_quantiles = c(0.25, 0.5, 0.75),
                  show.legend = F)
 ```
-![](../images/76.png)
+![](../images/76.jpg)
 
 ## geom_arcboxplot
 
@@ -481,7 +481,7 @@ ggcirclize(dbox, aes(x, y,start = 0,end = 360)) +
 ggplot(mpg, aes(class, hwy)) +
   geom_boxplot()
 ```
-![](../images/77.png)
+![](../images/77.jpg)
 
 
 
@@ -489,7 +489,7 @@ ggplot(mpg, aes(class, hwy)) +
 ggcirclize(mpg, aes(class, hwy)) +
   geom_arcboxplot()
 ```
-![](../images/78.png)
+![](../images/78.jpg)
 
 Change the outlier point graphic settings:
 
@@ -497,7 +497,7 @@ Change the outlier point graphic settings:
 ggcirclize(mpg, aes(class, hwy)) +
   geom_arcboxplot(outlier.size = 5,outlier.colour = "red")
 ```
-![](../images/79.png)
+![](../images/79.jpg)
 
 Horizontal boxplot:
 
@@ -505,7 +505,7 @@ Horizontal boxplot:
 ggcirclize(mpg, aes(x = hwy, y = class)) +
   geom_arcboxplot()
 ```
-![](../images/80.png)
+![](../images/80.jpg)
 
 Add notch:
 
@@ -513,14 +513,14 @@ Add notch:
 ggplot(mpg, aes(class, hwy)) +
   geom_boxplot(notch = TRUE)
 ```
-![](../images/81.png)
+![](../images/81.jpg)
 
 
 ```r
 ggcirclize(mpg, aes(class, hwy)) +
   geom_arcboxplot(notch = TRUE)
 ```
-![](../images/82.png)
+![](../images/82.jpg)
 
 
 
@@ -528,7 +528,7 @@ ggcirclize(mpg, aes(class, hwy)) +
 ggcirclize(mpg, aes(class, hwy)) +
   geom_arcboxplot(varwidth = TRUE)
 ```
-![](../images/83.png)
+![](../images/83.jpg)
 
 Multiple groups:
 
@@ -536,7 +536,7 @@ Multiple groups:
 ggcirclize(mpg, aes(class, hwy)) +
   geom_arcboxplot(aes(colour = drv))
 ```
-![](../images/84.png)
+![](../images/84.jpg)
 
 ## geom_arcarea
 
@@ -555,27 +555,27 @@ df <- data.frame(
 ggplot(df, aes(x=weight)) +
   geom_area(stat = "bin")
 ```
-![](../images/85.png)
+![](../images/85.jpg)
 
 ```r
 ggcirclize(df, aes(x=weight)) +
   geom_arcarea(stat = "bin")
 ```
-![](../images/86.png)
+![](../images/86.jpg)
 Multiple groups:
 
 ```r
 ggplot(df, aes(x=weight, fill=sex)) +
   geom_area(stat ="bin")
 ```
-![](../images/87.png)
+![](../images/87.jpg)
 
 
 ```r
 ggcirclize(df, aes(x=weight, fill=sex)) +
   geom_arcarea(stat = "bin")
 ```
-![](../images/88.png)
+![](../images/88.jpg)
 
 ## geom_arcdensity
 
@@ -588,27 +588,27 @@ ggcirclize(df, aes(x=weight, fill=sex)) +
 ggplot(diamonds, aes(carat)) +
   geom_density()
 ```
-![](../images/89.png)
+![](../images/89.jpg)
 
 ```r
 ggcirclize(diamonds, aes(carat)) +
   geom_arcdensity()
 ```
-![](../images/90.png)
+![](../images/90.jpg)
 
 
 ```r
 ggplot(diamonds, aes(y = carat)) +
   geom_density()
 ```
-![](../images/91.png)
+![](../images/91.jpg)
 
 
 ```r
 ggcirclize(diamonds, aes(y = carat)) +
   geom_arcdensity()
 ```
-![](../images/92.png)
+![](../images/92.jpg)
 
 Mapping with color:
 
@@ -616,7 +616,7 @@ Mapping with color:
 ggcirclize(diamonds, aes(depth, fill = cut, colour = cut)) +
   geom_arcdensity(alpha = 0.1)
 ```
-![](../images/93.png)
+![](../images/93.jpg)
 
 Different position mode:
 
@@ -624,19 +624,19 @@ Different position mode:
 ggplot(diamonds, aes(carat, fill = cut)) +
   geom_density(position = "stack")
 ```
-![](../images/94.png)
+![](../images/94.jpg)
 
 ```r
 ggcirclize(diamonds, aes(x = carat, fill = cut)) +
   geom_arcdensity(position = "stack")
 ```
-![](../images/95.png)
+![](../images/95.jpg)
 
 ```r
 ggcirclize(diamonds, aes(carat, after_stat(count), fill = cut)) +
   geom_arcdensity(position = "fill")
 ```
-![](../images/96.png)
+![](../images/96.jpg)
 
 ## geom_archistogram
 
@@ -648,13 +648,13 @@ ggcirclize(diamonds, aes(carat, after_stat(count), fill = cut)) +
 ggplot(diamonds, aes(carat)) +
   geom_histogram()
 ```
-![](../images/97.png)
+![](../images/97.jpg)
 
 ```r
 ggcirclize(diamonds, aes(carat)) +
   geom_archistogram()
 ```
-![](../images/98.png)
+![](../images/98.jpg)
 
 Change the **binwidth**:
 
@@ -662,7 +662,7 @@ Change the **binwidth**:
 ggcirclize(diamonds, aes(carat)) +
   geom_archistogram(binwidth = 0.01)
 ```
-![](../images/99.png)
+![](../images/99.jpg)
 
 ## geom_arctext
 
@@ -677,13 +677,13 @@ df <- data.frame(x = 1:20,y = 1,y1 = 1:20,id = sample(LETTERS[1:4],20,replace = 
 ggcirclize(df, aes(x, y, label = label)) +
   geom_arctext(aes(r0 = 1,end = 360))
 ```
-![](../images/100.png)
+![](../images/100.jpg)
 
 ```r
 ggcirclize(df, aes(x, y, label = label)) +
   geom_arctext(aes(r0 = 1,end = 360,color = id))
 ```
-![](../images/101.png)
+![](../images/101.jpg)
 
 Change **curved.label=FALSE**:
 
@@ -692,5 +692,5 @@ ggcirclize(df, aes(x, y, label = label)) +
   geom_arctext(aes(r0 = 1,end = 360,color = id),
                curved.label = F)
 ```
-![](../images/102.png)
+![](../images/102.jpg)
 

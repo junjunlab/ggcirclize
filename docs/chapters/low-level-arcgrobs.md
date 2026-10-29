@@ -20,7 +20,7 @@ newpage()
 grid.draw(arcSectorGrob(start = 0,end = 180))
 ```
 
-![](../images/1.png)
+![](../images/1.jpg)
 
 **r0,r1** control the radius of the rectangle:
 
@@ -30,7 +30,7 @@ grid.draw(arcSectorGrob(start = 0,end = 180,
                         r0 = 0.5,r1 = 0.8))
 ```
 
-![](../images/2.png)
+![](../images/2.jpg)
 
 **extend.xscale** and **extend.yscale** control the extension of the xscale and yscale:
 
@@ -41,7 +41,7 @@ grid.draw(arcSectorGrob(start = 0,end = 270,
                         extend.xscale = 0,extend.yscale = 0))
 ```
 
-![](../images/3.png)
+![](../images/3.jpg)
 
 **sector.gp** controls the graphics of rectangle:
 
@@ -55,7 +55,7 @@ grid.draw(arcSectorGrob(start = 0,end = 270,
                         sector.gp = gpar(fill = "orange",col = NA)))
 ```
 
-![](../images/4.png)
+![](../images/4.jpg)
 
 Other parameter settings about axis can be passed in **arcxAxisGrob.params** and **arcyAxisGrob.params**
 arguments:
@@ -72,7 +72,7 @@ grid.draw(arcSectorGrob(start = 0,end = 270,
 ))
 ```
 
-![](../images/5.png)
+![](../images/5.jpg)
 
 
 ## arcAxisGrob
@@ -91,7 +91,7 @@ grid.draw(arcAxisGrob(start = 0,end = 350,
                       extend.xscale = 0,
                       axis.type = "x",pos = "top"))
 ```
-![](../images/6.png)
+![](../images/6.jpg)
 
 
 **breaks.n** controls the numbers main ticks. **nice.facing** controls the axis labels rotation and
@@ -108,7 +108,7 @@ grid.draw(arcAxisGrob(start = 0,end = 350,
                       clock.wise = T))
 ```
 
-![](../images/7.png)
+![](../images/7.jpg)
 You can specify the **xscale** to define the xaxis range:
 
 ```r
@@ -120,7 +120,7 @@ grid.draw(arcAxisGrob(start = 0,end = 350,
                       xscale = c(1,100),
                       breaks.n = 20))
 ```
-![](../images/7.png)
+![](../images/7.jpg)
 
 
 Change the tick labels by using **breaks.label**:
@@ -135,7 +135,7 @@ grid.draw(arcAxisGrob(start = 0,end = 350,
                       breaks.n = 20,
                       breaks.label = LETTERS[1:20]))
 ```
-![](../images/8.png)
+![](../images/8.jpg)
 
 **minor.ticks.n** controls the minor ticks number:
 
@@ -150,7 +150,7 @@ grid.draw(arcAxisGrob(start = 0,end = 350,
                       breaks.label = LETTERS[1:20],
                       minor.ticks.n = 0))
 ```
-![](../images/9.png)
+![](../images/9.jpg)
 
 Change the position of axis:
 
@@ -161,7 +161,7 @@ grid.draw(arcAxisGrob(start = 0,end = 350,
                       extend.xscale = 0,
                       axis.type = "x",pos = "bottom"))
 ```
-![](../images/10.png)
+![](../images/10.jpg)
 
 Similar settings to the y axis:
 
@@ -182,7 +182,7 @@ grid.draw(arcAxisGrob(start = 0,end = 180,
                       yscale = c(0,100),
                       breaks.n = 5))
 ```
-![](../images/11.png)
+![](../images/11.jpg)
 
 
 Use the **breaks** and **xscale** to map correct axis position to the scale range:
@@ -210,7 +210,7 @@ grid.draw(arcAxisGrob(start = 13,end = 177,
                       nice.facing = T,
                       axis.type = "x",pos = "top"))
 ```
-![](../images/12.png)
+![](../images/12.jpg)
 
 
 The same situation for y axis:
@@ -252,7 +252,7 @@ grid.draw(arcAxisGrob(start = 30,end = 150,
                       breaks = seq(20,80,20),
                       axis.type = "y",pos = "right"))
 ```
-![](../images/13.png)
+![](../images/13.jpg)
 
 
 ## arcPointGrob
@@ -272,7 +272,7 @@ grid.draw(arcPointGrob(x = mtcars$mpg,y = mtcars$disp,
                        start = 0,end = 180,
                         r0 = 0.5,r1 = 1))
 ```
-![](../images/14.png)
+![](../images/14.jpg)
 
 ## arcSegmentsGrob
 
@@ -287,7 +287,7 @@ grid.draw(arcSegmentsGrob(xmin = rep(1,10),xmax = rep(10,10),
                           ymin = 1:10,ymax = 1:10,
                           r0 = 0.5,r1 = 1,start = 0,end = 180))
 ```
-![](../images/15.png)
+![](../images/15.jpg)
 Oblique line in arc plot:
 
 ```r
@@ -296,7 +296,7 @@ grid.draw(arcSegmentsGrob(xmin = c(1,1),xmax = c(5,5),
                           ymin = c(1,1),ymax = c(3,5),
                           r0 = 0.5,r1 = 1,start = 0,end = 180))
 ```
-![](../images/16.png)
+![](../images/16.jpg)
 
 ## arcLinesGrob
 
@@ -309,7 +309,7 @@ newpage()
 grid.draw(arcLinesGrob(x = c(0,0.5,1),y = c(0.375,0,1),
                        start = 0,end = 180,r0 = 0.5,r1 = 1))
 ```
-![](../images/17.png)
+![](../images/17.jpg)
 
 ## arcRectGrob
 
@@ -326,7 +326,7 @@ grid.draw(arcRectGrob(xmin = c(1,10,20),xmax = c(9,15,35),
                       ymin = c(1,5,10),ymax = c(2,8,15),
                       start = 0,end = 180,r0 = 0.5,r1 = 0.8))
 ```
-![](../images/18.png)
+![](../images/18.jpg)
 
 ## arcPolygonGrob
 
@@ -343,7 +343,7 @@ y <- c(0.1,0.9,0.1)
 grid.newpage()
 grid.polygon(x = x,y = y)
 ```
-![](../images/19.png)
+![](../images/19.jpg)
 
 And we show it in arc plot:
 
@@ -352,7 +352,7 @@ newpage()
 grid.draw(arcPolygonGrob(x = x,y = y,
                          start = 0,end = 180,r0 = 0.5,r1 = 1))
 ```
-![](../images/20.png)
+![](../images/20.jpg)
 
 
 Draw multiple triangles:
@@ -367,7 +367,7 @@ grid.draw(arcPolygonGrob(x = x1,y = y1,
                          start = 0,end = 360,r0 = 0.5,r1 = 1))
 ```
 
-![](../images/21.png)
+![](../images/21.jpg)
 
 
 ```r
@@ -389,7 +389,7 @@ grid.draw(arcPolygonGrob(x = c(0.1,0.2,0.3,0.4,0.5,0.4,0.7,0.6,0.7),
                          start = 0,end = 180,r0 = 0.5,r1 = 1))
 ```
 
-![](../images/22.png)
+![](../images/22.jpg)
 We show an example for ggplot2 output:
 
 ```r
@@ -415,7 +415,7 @@ p <- ggplot(datapoly, aes(x = x, y = y)) +
   geom_polygon(aes(fill = value, group = id))
 p
 ```
-![](../images/23.png)
+![](../images/23.jpg)
 
 
 Re-write by using **arcPolygonGrob**:
@@ -426,7 +426,7 @@ grid.draw(arcPolygonGrob(x = datapoly$x,y = datapoly$y,id = datapoly$id,
                          start = 0,end = 180,r0 = 0.5,r1 = 1,
                          polygon.gp = gpar(fill = 1:6)))
 ```
-![](../images/24.png)
+![](../images/24.jpg)
 
 
 ## arcLinksGrob
@@ -445,7 +445,7 @@ grid.draw(arcLinksGrob(start = 0,end = 300,r = 1))
 grid.draw(arcLinksGrob(start = c(0,30),end = c(70,80),r = 1))
 grid.draw(arcLinksGrob(start = c(350,360),end = c(260,270),r = 1))
 ```
-![](../images/25.png)
+![](../images/25.jpg)
 
 
 **curve.height** controls the line arc height:
@@ -454,7 +454,7 @@ newpage()
 grid.draw(arcLinksGrob(start = 0,end = 60,r = 1,curve.height = 1))
 grid.draw(arcLinksGrob(start = 0,end = 60,r = 1,curve.height = 0.5))
 ```
-![](../images/26.png)
+![](../images/26.jpg)
 
 
 Add arrows:
@@ -466,7 +466,7 @@ grid.draw(arcLinksGrob(start = c(0,15),end = c(300,320),
                        r = 1,
                        start.arrow = T,end.arrow = T))
 ```
-![](../images/27.png)
+![](../images/27.jpg)
 
 ## arcLinks2Grob
 
@@ -480,7 +480,7 @@ grid.draw(arcLinks2Grob(start = c(0,15),end = c(300,320),
                         r0 = 0.6,r1 = 1,r = 1,
                         start.arrow = T,end.arrow = T))
 ```
-![](../images/28.png)
+![](../images/28.jpg)
 
 **get_height** can get relative curve height with the degrees(0-180):
 
@@ -498,7 +498,7 @@ for (th in 1:10) {
                           r0 = 1,r1 = 1,r = 1))
 }
 ```
-![](../images/29.png)
+![](../images/29.jpg)
 
 ## arcTextGrob
 
@@ -513,7 +513,7 @@ grid.draw(arcTextGrob(x = 1,y = 1,
                       labels = "This is a nice day today!",
                       start = 0,end = 180,r0 = 0.5,r1 = 1))
 ```
-![](../images/30.png)
+![](../images/30.jpg)
 
 
 Default **nice.facing==TRUE**:
@@ -525,7 +525,7 @@ grid.draw(arcTextGrob(x = 1:20,y = rep(1,20),
                       curved.label = F,
                       start = 0,end = 360,r0 = 0.5,r1 = 1))
 ```
-![](../images/31.png)
+![](../images/31.jpg)
 
 Youcan turn it off:
 
@@ -538,7 +538,7 @@ grid.draw(arcTextGrob(x = 1:20,y = rep(1,20),
                       inward = T,
                       start = 0,end = 360,r0 = 1,r1 = 1))
 ```
-![](../images/32.png)
+![](../images/32.jpg)
 
 
 **curved.label** controls the labels whether be drawn in arc format:
@@ -551,7 +551,7 @@ grid.draw(arcTextGrob(x = 1:20,y = 1:20,
                       curved.label = F,
                       text.gp = gpar(fontsize = 10)))
 ```
-![](../images/33.png)
+![](../images/33.jpg)
 
 ```r
 newpage()
@@ -562,5 +562,5 @@ grid.draw(arcTextGrob(x = 1:20,y = 1:20,
                       curved.label = T,
                       text.gp = gpar(fontsize = 10)))
 ```
-![](../images/34.png)
+![](../images/34.jpg)
 

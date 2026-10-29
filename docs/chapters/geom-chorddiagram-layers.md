@@ -37,14 +37,14 @@ ggcirclize(df,aes(end = 360,r = 0.8,
                   from = from,to = to,value = value)) +
   geom_chordDiagram()
 ```
-![](../images/155.png)
+![](../images/155.jpg)
 
 ```r
 ggcirclize(df,aes(end = 360,r = 0.8,
                   from = from,to = to,value = value)) +
   geom_chordDiagram(aes(fill = from))
 ```
-![](../images/156.png)
+![](../images/156.jpg)
 
 Change the orders:
 
@@ -54,7 +54,7 @@ ggcirclize(df,aes(end = 360,r = 0.8,
   geom_chordDiagram(aes(fill = from),
                     sector.order = c("S2","S1","S3",paste0("E",6:1)))
 ```
-![](../images/157.png)
+![](../images/157.jpg)
 
 Highlight the **from** direction:
 
@@ -64,7 +64,7 @@ ggcirclize(df,aes(end = 360,r = 0.8,
   geom_chordDiagram(aes(fill = from),
                     directional = 1)
 ```
-![](../images/158.png)
+![](../images/158.jpg)
 
 
 Highlight the **to** direction:
@@ -75,7 +75,7 @@ ggcirclize(df,aes(end = 360,r = 0.8,
   geom_chordDiagram(aes(fill = from),
                     directional = -1)
 ```
-![](../images/159.png)
+![](../images/159.jpg)
 
 Add arrows:
 
@@ -86,7 +86,7 @@ ggcirclize(df,aes(end = 360,r = 0.8,
                     directional = -1,
                     start.arrow = T,end.arrow = T,arrow.len = 0.06)
 ```
-![](../images/160.png)
+![](../images/160.jpg)
 
 Add curve lines:
 
@@ -97,7 +97,7 @@ ggcirclize(df,aes(end = 360,r = 0.8,
                     link2line = T,
                     curve.arrow = arrow(type = "closed",length = unit(0.2,"cm")))
 ```
-![](../images/161.png)
+![](../images/161.jpg)
 
 If the names overlap for **from** and **to** variable:
 
@@ -129,7 +129,7 @@ ggcirclize(df,aes(end = 360,r = 0.8,
                   from = from,to = to,value = value)) +
   geom_chordDiagram(aes(fill = from))
 ```
-![](../images/162.png)
+![](../images/162.jpg)
 
 
 
@@ -138,7 +138,7 @@ ggcirclize(df,aes(end = 360,r = 0.8,
                   from = from,to = to,value = value)) +
   geom_chordDiagram(aes(fill = from),directional = 1)
 ```
-![](../images/163.png)
+![](../images/163.jpg)
 
 
 ```r
@@ -146,7 +146,7 @@ ggcirclize(df,aes(end = 360,r = 0.8,
                   from = from,to = to,value = value)) +
   geom_chordDiagram(aes(fill = from),directional = -1)
 ```
-![](../images/164.png)
+![](../images/164.jpg)
 
 
 

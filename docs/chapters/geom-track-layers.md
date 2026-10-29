@@ -15,7 +15,7 @@ ggplot(mtcars,aes(x = mpg,y = disp,color = factor(cyl))) +
   geom_point() +
   facet_wrap(~cyl)
 ```
-![](../images/103.png)
+![](../images/103.jpg)
 
 
 ```r
@@ -24,7 +24,7 @@ ggcirclize(data = mtcars,
                          color = factor(cyl))) +
   geom_trackpoint()
 ```
-![](../images/104.png)
+![](../images/104.jpg)
 
 ```r
 ggcirclize(data = mtcars,
@@ -32,7 +32,7 @@ ggcirclize(data = mtcars,
                          color = factor(cyl))) +
   geom_trackpoint(xAxis.params = list(pos = "bottom"))
 ```
-![](../images/105.png)
+![](../images/105.jpg)
 
 **sector.gap** change the gap between sectors:
 
@@ -42,7 +42,7 @@ ggcirclize(data = mtcars,
                          color = factor(cyl))) +
   geom_trackpoint(sector.gap = 20,strip.label.pos = "bottom")
 ```
-![](../images/106.png)
+![](../images/106.jpg)
 
 You can set **scales** with **fixed/free/free_x/free_y** to adjust x and y scale range for each sector:
 
@@ -53,7 +53,7 @@ ggcirclize(data = mtcars,
                          start = 0,end = 360)) +
   geom_trackpoint(sector.gap = 20,scales = "free_y")
 ```
-![](../images/107.png)
+![](../images/107.jpg)
 
 ```r
 ggcirclize(data = mtcars,
@@ -62,7 +62,7 @@ ggcirclize(data = mtcars,
                          start = 0,end = 360)) +
   geom_trackpoint(sector.gap = 20,scales = "free")
 ```
-![](../images/108.png)
+![](../images/108.jpg)
 
 
 
@@ -80,7 +80,7 @@ ggcirclize(data = mat_long,
   geom_trackpoint(strip.label.pos = "bottom",sector.gap = 20,scales = "fixed")
 ```
 
-![](../images/109.png)
+![](../images/109.jpg)
 
 
 ```r
@@ -89,7 +89,7 @@ ggcirclize(data = mat_long,
                          sector = gp,end = 360)) +
   geom_trackpoint(strip.label.pos = "bottom",sector.gap = 20,scales = "free_x")
 ```
-![](../images/110.png)
+![](../images/110.jpg)
 
 
 ## geom_tracktile
@@ -107,7 +107,7 @@ ggplot(mat.long,aes(x = Var1,y = Var2,fill = value)) +
   theme(axis.text.x = element_text(angle = 90,hjust = 1,vjust = 0.5)) +
   facet_wrap(~gp,scales = "fixed")
 ```
-![](../images/111.png)
+![](../images/111.jpg)
 
 ```r
 ggcirclize(data = mat.long,mg.t = 2.5,mg.b = 2.5,
@@ -117,7 +117,7 @@ ggcirclize(data = mat.long,mg.t = 2.5,mg.b = 2.5,
                  scales = "fixed") +
   scale_fill_gradient2(low = "green",mid = "black",high = "red",midpoint = 0)
 ```
-![](../images/112.png)
+![](../images/112.jpg)
 
 ## geom_trackbar
 
@@ -127,14 +127,14 @@ ggcirclize(mpg,aes(x = class,fill = drv,sector = drv)) +
   geom_trackbar(strip.label.pos = "bottom",sector.gap = 20,
                 scales = "free_y")
 ```
-![](../images/113.png)
+![](../images/113.jpg)
 
 ```r
 ggcirclize(mpg,aes(x = class,fill = drv,sector = drv)) +
   geom_trackbar(strip.label.pos = "bottom",
                 scales = "free_x")
 ```
-![](../images/114.png)
+![](../images/114.jpg)
 
 
 ## geom_trackcol
@@ -149,7 +149,7 @@ ggcirclize(df,aes(x = x,y = y,fill = x,sector = gp)) +
                  sector.gap = 20,width = 0.5,add.bg = F,
                  scales = "free_x")
 ```
-![](../images/115.png)
+![](../images/115.jpg)
 
 ## geom_trackdensity
 
@@ -157,21 +157,21 @@ ggcirclize(df,aes(x = x,y = y,fill = x,sector = gp)) +
 ggcirclize(diamonds,aes(x = depth,fill = cut,sector = cut)) +
   geom_trackdensity(aes(end = 360),strip.label.pos = "bottom")
 ```
-![](../images/116.png)
+![](../images/116.jpg)
 
 ```r
 ggcirclize(diamonds,aes(x = depth,fill = cut,sector = cut)) +
   geom_trackdensity(aes(end = 360),strip.label.pos = "bottom",
                     scales = "free_y")
 ```
-![](../images/117.png)
+![](../images/117.jpg)
 ## geom_trackarea
 
 ```r
 ggcirclize(df, aes(x = weight, fill = sex,sector = sex)) +
   geom_trackarea(stat ="bin")
 ```
-![](../images/118.png)
+![](../images/118.jpg)
 
 ## geom_trackhist
 
@@ -181,7 +181,7 @@ ggcirclize(diamonds,aes(x = depth,fill = color,sector = color)) +
                  sector.gap = 20,
                  scales = "free_y")
 ```
-![](../images/119.png)
+![](../images/119.jpg)
 
 
 ## geom_trackviolin
@@ -190,7 +190,7 @@ ggcirclize(diamonds,aes(x = depth,fill = color,sector = color)) +
 ggcirclize(dbox, aes(x, y,start = 0,end = 360,sector = gp)) +
   geom_trackviolin(aes(fill = gp),scales = "free")
 ```
-![](../images/120.png)
+![](../images/120.jpg)
 
 ## geom_trackboxplot
 
@@ -205,4 +205,4 @@ ggcirclize(dbox, aes(x, y,start = 0,end = 360,sector = gp)) +
   geom_trackboxplot(aes(fill = gp),scales = "free")
 ```
 
-![](../images/121.png)
+![](../images/121.jpg)

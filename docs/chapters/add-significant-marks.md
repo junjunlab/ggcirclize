@@ -48,7 +48,7 @@ ggcirclize(data = mat.long,mg.t = 2.5,mg.b = 2.5,
                   scales = "free_x") +
   scale_fill_gradient2(low = "green",mid = "white",high = "red",midpoint = 0)
 ```
-![](../images/165.png)
+![](../images/165.jpg)
 
 
 We should add **mark** variable in mappig:
@@ -61,7 +61,7 @@ ggcirclize(data = mat.long,mg.t = 2.5,mg.b = 2.5,
                   add.yaxis = F,strip.label.pos = "bottom",scales = "free_x") +
   scale_fill_gradient2(low = "green",mid = "white",high = "red",midpoint = 0)
 ```
-![](../images/166.png)
+![](../images/166.jpg)
 
 ### matrix mark annotation
 
@@ -106,7 +106,7 @@ ggcirclize(data = mat_sig_long,mg.t = 2.5,mg.b = 2.5,
   geom_tracktile2(add.yaxis = F,strip.label.pos = "bottom",
                   scales = "free_x")
 ```
-![](../images/167.png)
+![](../images/167.jpg)
 
 
 ```r
@@ -117,7 +117,7 @@ ggcirclize(data = mat_sig_long,mg.t = 2.5,mg.b = 2.5,
                   scales = "free_x",
                   mark.mat = T)
 ```
-![](../images/168.png)
+![](../images/168.jpg)
 
 Combine heatmap and mark annotation layers:
 
@@ -136,7 +136,7 @@ ggcirclize(data = mat_sig_long,mg.t = 2.5,mg.b = 2.5,
                   mark.mat = T) +
   scale_fill_gradient2(low = "green",mid = "white",high = "red",midpoint = 0)
 ```
-![](../images/169.png)
+![](../images/169.jpg)
 
 
 ## geom_trackgenomictile2
@@ -177,7 +177,7 @@ ggcirclize(bed_long,aes(end = 360,r0 = 0.6,r1 = 0.9,
                          chrom_data = chrom_hg19,strip.label = T) +
   scale_fill_gradient2(low = "green",mid = "white",high = "red",midpoint = 0)
 ```
-![](../images/170.png)
+![](../images/170.jpg)
 
 Adjust the mark annotation position:
 
@@ -190,7 +190,7 @@ ggcirclize(bed_long,aes(end = 360,r0 = 0.6,r1 = 0.9,
                          mark.shift = -0.05) +
   scale_fill_gradient2(low = "green",mid = "white",high = "red",midpoint = 0)
 ```
-![](../images/171.png)
+![](../images/171.jpg)
 
 Put them on the top:
 
@@ -203,7 +203,7 @@ ggcirclize(bed_long,aes(end = 360,r0 = 0.6,r1 = 0.9,
                          mark.pos = "top") +
   scale_fill_gradient2(low = "green",mid = "white",high = "red",midpoint = 0)
 ```
-![](../images/172.png)
+![](../images/172.jpg)
 
 Assign other symbol:
 
@@ -219,7 +219,7 @@ ggcirclize(bed_long,aes(end = 360,r0 = 0.6,r1 = 0.9,
                          mark.pos = "top") +
   scale_fill_gradient2(low = "green",mid = "white",high = "red",midpoint = 0)
 ```
-![](../images/173.png)
+![](../images/173.jpg)
 
 
 ### matrix mark annotation
@@ -258,7 +258,7 @@ ggcirclize(bed_long_sig,aes(end = 360,r0 = 0.6,r1 = 0.9,
                          strip.label = T,
                          mark.mat = T)
 ```
-![](../images/174.png)
+![](../images/174.jpg)
 
 Combine with heatmap:
 
@@ -274,6 +274,6 @@ ggcirclize(bed_long_sig,aes(end = 360,r0 = 0.6,r1 = 0.9,
                          strip.label = F,
                          mark.mat = T)
 ```
-![](../images/175.png)
+![](../images/175.jpg)
 
 

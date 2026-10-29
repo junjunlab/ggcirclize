@@ -54,7 +54,7 @@ ggcirclize(bed,aes(end = 360,
                    value = value1)) +
   geom_trackgenomicpoint(chrom_data = chrom_hg19)
 ```
-![](../images/122.png)
+![](../images/122.jpg)
 
 Mapping with color:
 
@@ -65,7 +65,7 @@ ggcirclize(bed,aes(end = 360,
                    value = value1)) +
   geom_trackgenomicpoint(chrom_data = chrom_hg19)
 ```
-![](../images/123.png)
+![](../images/123.jpg)
 
 **space=fixed** can make the size of each sector be same:
 
@@ -77,7 +77,7 @@ ggcirclize(bed,aes(end = 360,
   geom_trackgenomicpoint(chrom_data = chrom_hg19,
                          space = "fixed")
 ```
-![](../images/124.png)
+![](../images/124.jpg)
 
 ## geom_trackgenomicrect
 
@@ -105,7 +105,7 @@ ggcirclize(bed,
   geom_trackgenomicrect(aes(ymin = ymin,ymax = ymax),
                         chrom_data = chrom_hg19)
 ```
-![](../images/125.png)
+![](../images/125.jpg)
 
 
 ```r
@@ -115,7 +115,7 @@ ggcirclize(bed,
   geom_trackgenomicrect(aes(ymin = ymin,ymax = ymax,fill = group),
                         chrom_data = chrom_hg19)
 ```
-![](../images/126.png)
+![](../images/126.jpg)
 
 Add chromosome cytoband:
 
@@ -138,7 +138,7 @@ ggcirclize(mapping = aes(start = 0,end = 360)) +
                          add.xaxis = F,strip.label = F,
                          chrom_data = chrom_hg19)
 ```
-![](../images/127.png)
+![](../images/127.jpg)
 
 ## geom_trackgenomictile
 
@@ -170,7 +170,7 @@ ggcirclize(bed_long,aes(end = 360,r0 = 0.5,r1 = 0.8,
                         chrom_data = chrom_hg19,strip.label = T) +
   scale_fill_gradient2(low = "green",mid = "white",high = "red",midpoint = 0)
 ```
-![](../images/128.png)
+![](../images/128.jpg)
 
 
 **add_link** can draw connection with the origin chromosome region:
@@ -184,7 +184,7 @@ ggcirclize(bed_long,aes(end = 360,r0 = 0.5,r1 = 0.7,
                         link_pos = "top") +
   scale_fill_gradient2(low = "green",mid = "white",high = "red",midpoint = 0)
 ```
-![](../images/129.png)
+![](../images/129.jpg)
 
 Change link line color:
 
@@ -198,7 +198,7 @@ ggcirclize(bed_long,aes(end = 360,r0 = 0.5,r1 = 0.7,
                         link_col = circlize::rand_color(24)) +
   scale_fill_gradient2(low = "green",mid = "white",high = "red",midpoint = 0)
 ```
-![](../images/130.png)
+![](../images/130.jpg)
 
 
 Add cytoband plot:
@@ -223,7 +223,7 @@ ggcirclize(bed_long,aes(end = 360,r0 = 0.4,r1 = 0.68,
                                "gpos100" = "black","gvar" = "black","acen" = "red",
                                "stalk" = "blue"))
 ```
-![](../images/131.png)
+![](../images/131.jpg)
 
 Change the position:
 ```r
@@ -247,7 +247,7 @@ ggcirclize(bed_long,aes(end = 360,r0 = 0.6,r1 = 0.9,
                                "gpos100" = "black","gvar" = "black","acen" = "red",
                                "stalk" = "blue"))
 ```
-![](../images/132.png)
+![](../images/132.jpg)
 
 
 
@@ -262,7 +262,7 @@ ggcirclize(bed,aes(end = 360,fill = chr,
                    value = value1)) +
   geom_trackgenomicarea(chrom_data = chrom_hg19)
 ```
-![](../images/133.png)
+![](../images/133.jpg)
 
 ## geom_trackgenomicline
 
@@ -275,7 +275,7 @@ ggcirclize(bed,aes(end = 360,color = chr,
                    value = value1)) +
   geom_trackgenomicline(chrom_data = chrom_hg19)
 ```
-![](../images/134.png)
+![](../images/134.jpg)
 
 ## geom_trackgenomicdensity
 
@@ -286,14 +286,14 @@ ggcirclize(DMR_hyper,aes(end = 360,
                          chr = chr,gstart = start,gend = end)) +
   geom_trackgenomicdensity(chrom_data = chrom_hg19)
 ```
-![](../images/135.png)
+![](../images/135.jpg)
 
 ```r
 ggcirclize(DMR_hyper,aes(end = 360,
                          chr = chr,gstart = start,gend = end)) +
   geom_trackgenomicdensity(chrom_data = chrom_hg19,fill = "pink",color = NA)
 ```
-![](../images/136.png)
+![](../images/136.jpg)
 
 Draw partial chromosomes:
 
@@ -303,7 +303,7 @@ ggcirclize(DMR_hyper %>% filter(chr %in% c(paste0("chr",1:6),"chr20","chrX")),
                chr = chr,gstart = start,gend = end)) +
   geom_trackgenomicdensity(chrom_data = chrom_hg19,fill = "pink",color = NA)
 ```
-![](../images/137.png)
+![](../images/137.jpg)
 
 Keep all chromosomes:
 
@@ -314,7 +314,7 @@ ggcirclize(DMR_hyper %>% filter(chr %in% c(paste0("chr",1:6),"chr20","chrX")),
   geom_trackgenomicdensity(chrom_data = chrom_hg19,fill = "pink",color = NA,
                            keep.all.chrom = T)
 ```
-![](../images/138.png)
+![](../images/138.jpg)
 
 ## geom_trackgenomicrainfall
 
@@ -331,7 +331,7 @@ ggcirclize(cb,
   geom_trackgenomicrainfall(chrom_data = chrom_hg19,size = 1) +
   scale_color_manual(values = c(DMR_hyper = "red",DMR_hypo = "blue"))
 ```
-![](../images/139.png)
+![](../images/139.jpg)
 
 
 ## geom_trackgenomiclink
@@ -371,7 +371,7 @@ ggcirclize(bed_link,aes(end = 360,
                         chr1 = chr2,gstart1 = start2)) +
   geom_trackgenomiclink(aes(r = 1),chrom_data = chrom_hg19)
 ```
-![](../images/140.png)
+![](../images/140.jpg)
 
 ```r
 ggcirclize(bed_link,aes(end = 360,
@@ -379,7 +379,7 @@ ggcirclize(bed_link,aes(end = 360,
                         chr1 = chr2,gend1 = end2)) +
   geom_trackgenomiclink(aes(r = 1),chrom_data = chrom_hg19)
 ```
-![](../images/141.png)
+![](../images/141.jpg)
 
 Add arrows:
 
@@ -390,7 +390,7 @@ ggcirclize(bed_link,aes(end = 360,color = group,fill = group,
   geom_trackgenomiclink(aes(r = 1),chrom_data = chrom_hg19,
                         curve.arrow = arrow(type = "closed",end = "both"))
 ```
-![](../images/142.png)
+![](../images/142.jpg)
 
 
 
@@ -400,7 +400,7 @@ ggcirclize(bed_link,aes(end = 360,
                         chr1 = chr2,gstart1 = start2,gend1 = end2)) +
   geom_trackgenomiclink(aes(r = 1),chrom_data = chrom_hg19)
 ```
-![](../images/143.png)
+![](../images/143.jpg)
 
 
 Mapping with color:
@@ -413,7 +413,7 @@ ggcirclize(bed_link,aes(end = 360,
                         chrom_data = chrom_hg19,
                         keep.all.chrom = T)
 ```
-![](../images/144.png)
+![](../images/144.jpg)
 
 ```r
 ggcirclize(bed_link,aes(end = 360,
@@ -424,7 +424,7 @@ ggcirclize(bed_link,aes(end = 360,
                         keep.all.chrom = T,
                         start.arrow = T,end.arrow = T)
 ```
-![](../images/145.png)
+![](../images/145.jpg)
 
 ```r
 ggcirclize(bed_link,aes(end = 360,
@@ -436,7 +436,7 @@ ggcirclize(bed_link,aes(end = 360,
                         start.arrow = T,end.arrow = T,
                         linetype = "dashed",linewidth = 1.5)
 ```
-![](../images/146.png)
+![](../images/146.jpg)
 
 Combine multiple layers:
 
@@ -460,7 +460,7 @@ ggcirclize(bed_link,aes(end = 360)) +
                          keep.all.chrom = T,
                          chrom_data = chrom_hg19)
 ```
-![](../images/147.png)
+![](../images/147.jpg)
 
 ## geom_trackgenomiclabel
 
@@ -474,7 +474,7 @@ ggcirclize(bed,aes(end = 360,r0 = 0.7,r1 = 0.7,
                    label = label)) +
   geom_trackgenomiclabel(chrom_data = chrom_hg19)
 ```
-![](../images/148.png)
+![](../images/148.jpg)
 
 Change the connection position:
 
@@ -486,7 +486,7 @@ ggcirclize(bed,aes(end = 360,r0 = 0.7,r1 = 0.7,
                          link_pos = "bottom",
                          strip.label.pos = "bottom")
 ```
-![](../images/149.png)
+![](../images/149.jpg)
 
 Change connection color:
 
@@ -498,7 +498,7 @@ ggcirclize(bed,aes(end = 360,r0 = 0.9,r1 = 0.9,
                          link_col = circlize::rand_color(24),
                          label.col = circlize::rand_color(24))
 ```
-![](../images/150.png)
+![](../images/150.jpg)
 
 ## geom_trackgenomiclabel2
 
@@ -517,7 +517,7 @@ ggcirclize(bed,aes(end = 360,
                    label = label)) +
   geom_trackgenomiclabel2(aes(r0 = 0.7,r1 = 0.7),chrom_data = chrom_hg19)
 ```
-![](../images/151.png)
+![](../images/151.jpg)
 
 ```r
 ggcirclize(bed,aes(end = 360,
@@ -527,7 +527,7 @@ ggcirclize(bed,aes(end = 360,
                           link_pos = "bottom",
                           strip.label.pos = "bottom")
 ```
-![](../images/152.png)
+![](../images/152.jpg)
 
 ```r
 ggcirclize(bed,aes(end = 360,
@@ -536,7 +536,7 @@ ggcirclize(bed,aes(end = 360,
   geom_trackgenomiclabel2(aes(r0 = 0.7,r1 = 0.7),
                           chrom_data = chrom_hg19)
 ```
-![](../images/153.png)
+![](../images/153.jpg)
 
 
 
@@ -550,4 +550,4 @@ ggcirclize(bed,aes(end = 360,
                          link_pos = "bottom",strip.label = F,
                          chrom_data = chrom_hg19)
 ```
-![](../images/154.png)
+![](../images/154.jpg)

@@ -27,4 +27,4 @@ ggcirclize(chr_df,
                chr = chr,gstart = start,gend = end)) +
   ggcirclize::geom_trackgenomicrect(aes(r0 = 0.8,r1 = 1,fill = chr))
 ```
-![](../images/188.png)
+![](../images/188.jpg)
