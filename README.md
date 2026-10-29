@@ -21,12 +21,6 @@ coordinate system.
 If you have ever needed a circos-style figure and did not want to learn a second,
 low-level plotting engine, this package is for you.
 
-<p align="center">
-  <img src="man/figures/README-example.png" width="58%" alt="Chord diagram drawn with geom_chordDiagram()" />
-</p>
-
-<p align="center"><em>A chord diagram built with <code>geom_chordDiagram()</code> — 300 dpi, no post-processing.</em></p>
-
 ---
 
 ## Highlights
