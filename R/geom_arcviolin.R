@@ -225,7 +225,7 @@ GeomArcviolin <- ggproto("GeomArcviolin", Geom,
 #'
 #' @param mapping Aesthetic mapping.
 #' @param data The data to be plotted.
-#' @param stat The statistical transformation to be applied (default: "arcydensity").
+#' @param stat The statistical transformation to be applied (default: "ydensity").
 #' @param position The position adjustment to be applied (default: "dodge").
 #' @param draw_quantiles Should quantiles be drawn? (default: NULL).
 #' @param trim Should the violin be trimmed? (default: TRUE).

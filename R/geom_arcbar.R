@@ -101,6 +101,10 @@ GeomArcbar <- ggproto("GeomArcbar", GeomArcrect,
                                                                breaks.label = breaks.label.x),
                                                           xAxis.params)
 
+                        # 扇区自身的 x 范围才是几何体真正画出来的范围（柱子/矩形都按它定位），
+                        # 上游传进来的 xscale 往往是全局范围，用它会让图形和刻度一起被压缩
+                        arcxAxisGrob.params$xscale <- xlim
+
                         arcyAxisGrob.params <- modifyList(list(yscale = ylim,
                                                                minor.ticks.n = minor.ticks.n.y,
                                                                breaks = breaks.y,
@@ -157,7 +161,7 @@ GeomArcbar <- ggproto("GeomArcbar", GeomArcrect,
 #' @import ggplot2
 #' @export
 geom_arcbar <- function(mapping = NULL, data = NULL,
-                        stat = "bar", position = "stack",
+                        stat = "arcbar", position = "stack",
                         na.rm = FALSE, show.legend = NA,
                         inherit.aes = TRUE,
                         just = 0.5,

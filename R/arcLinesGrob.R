@@ -138,8 +138,8 @@ makeContent.arcLinesGrob <- function(x){
     theta.x <- scales::rescale(x,to = 2*pi - range(as.radian(start_ed),as.radian(end_ed)),
                                from = thata.scale)
   }else{
-    theta.x <- scales::rescale(x,to = range(as.radian(end_ed),as.radian(start_ed)),
-                               from = rev(thata.scale))
+    theta.x <- scales::rescale(x,to = range(as.radian(start_ed),as.radian(end_ed)),
+                             from = thata.scale)
   }
 
   if(is.null(id)){

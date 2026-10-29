@@ -1,6 +1,6 @@
 Package: ggcirclize
 Title: Create Circular Elegant Visualisations Using the Grammar of Ggplot2
-Version: 0.0.2
+Version: 0.0.3
 Author: Jun Zhang
 Maintainer: Jun Zhang <3219030654@stu.cpu.edu.cn>
 BugReports: https://github.com/junjunlab/ggcirclize/issues
@@ -9,26 +9,26 @@ Description: It's aiming to extend circular plot in ggplot2 visualisation syster
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.3
 Imports: 
     circlize,
     cli,
     ComplexHeatmap,
-    DescTools,
     dplyr,
     ggplot2,
     grid,
     gtable,
-    lifecycle,
     magrittr,
     reshape2,
     rlang,
     scales,
-    tibble,
+    stats,
     utils,
     vctrs
+Suggests: 
+    quantreg
 Depends: 
-    R (>= 2.10)
+    R (>= 4.1.0)
 LazyData: true
 Collate: 
     'arcArrowGrob.R'
@@ -51,6 +51,7 @@ Collate:
     'geom_arcbar.R'
     'geom_arcboxplot.R'
     'geom_arccol.R'
+    'utilities-ggplot2.R'
     'geom_arcdensity.R'
     'geom_archistogram.R'
     'geom_arcline.R'
@@ -92,10 +93,14 @@ Collate:
     'geom_tracktile.R'
     'geom_tracktile2.R'
     'geom_trackviolin.R'
+    'ggcirclize-ggproto.R'
     'ggcirclize-package.R'
     'ggcirclize.R'
     'smartLabelAlignGrob.R'
+    'stat_arcbar.R'
+    'stat_arcboxplot.R'
+    'stat_arcdensity.R'
+    'utilities-arc-layout.R'
     'utilities-funcs.R'
-    'utilities-ggplot2.R'
     'utils-pipe.R'
     'zzz.R'

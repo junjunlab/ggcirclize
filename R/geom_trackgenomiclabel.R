@@ -13,7 +13,7 @@ GeomTrackgenomiclabel <- ggproto("GeomTrackgenomiclabel", Geom,
                                                        keep.all.chrom = FALSE,
                                                        add_link = TRUE,
                                                        link_pos = c("top","bottom"),
-                                                       link_r = 0.1,
+                                                       link_r = 0.10,
                                                        link_col = NULL,
                                                        label.col = NULL,
                                                        label.size = 3,
@@ -51,8 +51,10 @@ GeomTrackgenomiclabel <- ggproto("GeomTrackgenomiclabel", Geom,
                                      }else if(is.data.frame(get(gm))){
                                        chrom_data <- get(gm)
                                      }else{
-                                       message("Please supply a data frame includes chromsome length or
-                                               genome version(hg38,hg19,mm39,mm10,mm9).")
+                                       cli::cli_abort(c(
+                                         "Please supply {.arg chrom_data}: a data frame with chromosome lengths",
+                                         "i" = "or use a supported {.field genome} (hg38, hg19, mm39, mm10, mm9)."
+                                       ))
                                      }
                                    }
 
@@ -77,9 +79,9 @@ GeomTrackgenomiclabel <- ggproto("GeomTrackgenomiclabel", Geom,
 
                                    # label for different facets
                                    if(strip.label.pos == "top"){
-                                     label.r = unique(data$r1) + strip.label.space
+                                     label.r = strip_label_r(unique(data$r1),strip.label.space,add.xaxis)
                                    }else{
-                                     label.r = unique(data$r0) - strip.label.space
+                                     label.r = strip_label_r(unique(data$r0),-strip.label.space,add.yaxis)
                                    }
 
                                    size.unit <- resolve_text_unit(size.unit)
@@ -120,7 +122,13 @@ GeomTrackgenomiclabel <- ggproto("GeomTrackgenomiclabel", Geom,
                                          link_df <- unique(tmp_data[,c("chr","gstart","gend","label")])
                                          link_df <- transform(link_df,mid = (gstart + gend)/2)
                                          link_df <- link_df[order(link_df$mid),]
-                                         link_df$ht.x <- 1:nrow(link_df)
+
+                                         # Label slots: equal spacing inside the sector,
+                                         # exactly as in 0.0.2. Every label therefore
+                                         # sits within a couple of degrees of its gene, so
+                                         # the connector is a short radial tick instead of
+                                         # a long slanted run across its neighbours.
+                                         link_df$ht.x <- seq_len(nrow(link_df))
                                          link_df$ht.x.th <- rescale(link_df$ht.x,to = rev(range.th),
                                                                     from = c(min(link_df$ht.x) - 0.5,
                                                                              max(link_df$ht.x) + 0.5))
@@ -128,7 +136,17 @@ GeomTrackgenomiclabel <- ggproto("GeomTrackgenomiclabel", Geom,
                                          link_df$mid.th <- rescale(link_df$mid,to = rev(range.th),
                                                                    from = range.x)
 
-                                         # check link position
+                                         # check link position. `top` puts the labels
+                                         # inside the ring and `bottom` outside. r.y[1]
+                                         # must stay on the track so `up_line` marks the
+                                         # genomic interval right against it, and the rest
+                                         # of the connector marches towards the label.
+                                         # Same radii as 0.0.2: the connector lives just
+                                         # OUTSIDE the track (r.y[1] is the far end, r.y[4]
+                                         # sits on the track) and the label sits just
+                                         # INSIDE it. Keeping the link in its own band
+                                         # instead of running it across the label area is
+                                         # what makes the elbows look tidy.
                                          if(link_pos == "top"){
                                            r.y <- rev(seq(unique(tmp_data$r1),unique(tmp_data$r1) + link_r,length = 4))
                                            arcymin <- rep(1,nrow(link_df))
@@ -138,6 +156,7 @@ GeomTrackgenomiclabel <- ggproto("GeomTrackgenomiclabel", Geom,
                                            arcymin <- rep(0,nrow(link_df))
                                            arcymax <- rep(1,nrow(link_df))
                                          }
+
 
                                          # generate grobs
                                          vuline <- arcSegmentsGrob(xmin = link_df$mid,
@@ -168,6 +187,10 @@ GeomTrackgenomiclabel <- ggproto("GeomTrackgenomiclabel", Geom,
                                                                               max(link_df$ht.x) + 0.5))
 
                                          # ===========================================
+                                         # middle leg: the arc from the genomic angle
+                                         # to the label angle, exactly as in 0.0.2
+                                         # (r0 = r.y[2] -> r1 = r.y[3]).
+                                         #
                                          arcline <- arcSegmentsGrob(xmin = link_df$mid.th,
                                                                     xmax = link_df$ht.x.th,
                                                                     ymin = arcymin,
@@ -205,10 +228,18 @@ GeomTrackgenomiclabel <- ggproto("GeomTrackgenomiclabel", Geom,
                                        # =============================================================
 
                                        if(strip.label == TRUE){
+                                         # Strip labels all share one style: same size,
+                                         # same tangential direction. Narrow sectors just
+                                         # get crowded, exactly like the reference figure --
+                                         # shrinking some of them made the strip look
+                                         # uneven.
+                                         sec_lab <- sec_df$sector_name[sec]
+
                                          plabel <- arcTextGrob(x = 1,y = 1,
-                                                               labels = sec_df$sector_name[sec],
+                                                               labels = sec_lab,
                                                                shift = 0.7,
                                                                curved.label = FALSE,
+                                                               auto.fit = FALSE,
                                                                start = sec_df$sector_start[sec],
                                                                end = sec_df$sector_end[sec],
                                                                r0 = label.r,r1 = label.r,
@@ -223,18 +254,28 @@ GeomTrackgenomiclabel <- ggproto("GeomTrackgenomiclabel", Geom,
                                          plabel <- zeroGrob()
                                        }
 
-                                       # label position
+                                       # label sits past the far end of the connector.
+                                       # The gap has to be big enough that the text
+                                       # never touches the line: on the left/right of
+                                       # the circle the radius is horizontal, so label
+                                       # and connector are collinear and a 0.02 gap
+                                       # visually merged them.
                                        if(link_pos == "top"){
-                                         label.r0 <- r.y[4] - 0.025
-                                         label.r1 <- r.y[4] - 0.025
+                                         label.r0 <- if(link_pos == "top") r.y[4] - 0.025 else r.y[4] + 0.025
+                                         label.r1 <- label.r0
+                                         label.adj <- c(1, 0.5)
                                          inward <- TRUE
                                        }else{
-                                         label.r0 <- r.y[4] + 0.025
-                                         label.r1 <- r.y[4] + 0.025
+                                         label.r0 <- if(link_pos == "top") r.y[4] - 0.025 else r.y[4] + 0.025
+                                         label.r1 <- label.r0
+                                         label.adj <- c(0, 0.5)
                                          inward <- FALSE
                                        }
 
 
+                                       # radial labels: their footprint on the arc is
+                                       # the text height, so neighbouring labels do not
+                                       # run into each other
                                        ptack <- arcTextGrob(x = link_df$ht.x,
                                                             y = rep(0.5,nrow(link_df)),
                                                             labels = link_df$label,
@@ -243,8 +284,9 @@ GeomTrackgenomiclabel <- ggproto("GeomTrackgenomiclabel", Geom,
                                                             r0 = label.r0,
                                                             r1 = label.r1,
                                                             curved.label = FALSE,
-                                                            nice.facing = FALSE,
-                                                            inward = inward,
+                                                            facing = "clockwise",
+                                                            nice.facing = TRUE,
+                                                            adj = label.adj,
                                                             text.gp = gpar(col = label.col[sec],
                                                                            fontsize = label.size * size.unit),
                                                             extend.xscale = extend.xscale,
@@ -324,7 +366,7 @@ geom_trackgenomiclabel <- function(mapping = NULL, data = NULL,
                                    keep.all.chrom = FALSE,
                                    add_link = TRUE,
                                    link_pos = c("top","bottom"),
-                                   link_r = 0.1,
+                                   link_r = 0.10,
                                    link_col = NULL,
                                    label.col = NULL,
                                    label.size = 3,

@@ -68,8 +68,10 @@ GeomTrackgenomictile2 <- ggproto("GeomTrackgenomictile2", GeomArctile,
                                      }else if(is.data.frame(get(gm))){
                                        chrom_data <- get(gm)
                                      }else{
-                                       message("Please supply a data frame includes chromsome length or
-                                               genome version(hg38,hg19,mm39,mm10,mm9).")
+                                       cli::cli_abort(c(
+                                         "Please supply {.arg chrom_data}: a data frame with chromosome lengths",
+                                         "i" = "or use a supported {.field genome} (hg38, hg19, mm39, mm10, mm9)."
+                                       ))
                                      }
                                    }
 
@@ -94,9 +96,9 @@ GeomTrackgenomictile2 <- ggproto("GeomTrackgenomictile2", GeomArctile,
 
                                    # label for different facets
                                    if(strip.label.pos == "top"){
-                                     label.r = unique(data$r1) + strip.label.space
+                                     label.r = strip_label_r(unique(data$r1),strip.label.space,add.xaxis)
                                    }else{
-                                     label.r = unique(data$r0) - strip.label.space
+                                     label.r = strip_label_r(unique(data$r0),-strip.label.space,add.yaxis)
                                    }
 
                                    # whether add xy axis
@@ -303,7 +305,7 @@ GeomTrackgenomictile2 <- ggproto("GeomTrackgenomictile2", GeomArctile,
                                                         point.gp = gpar(
                                                           col = mark.col,
                                                           fill = mark.col,
-                                                          fontsize = unique(tmp_data$size)),
+                                                          fontsize = unique(tmp_data$size) * .pt),
                                                         extend.xscale = extend.xscale,
                                                         extend.yscale = extend.yscale,
                                                         clock.wise = unique(tmp_data$clock.wise))

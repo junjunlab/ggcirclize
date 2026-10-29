@@ -41,20 +41,30 @@ GeomArcrossbar <- ggproto("GeomArcrossbar", Geom,
                                                 lineend = "butt", linejoin = "round",
                                                 fatten = 2.5, width = NULL,flipped_aes = FALSE) {
                             data <- check_linewidth(data, snake_class(self))
+                            if (nrow(data) == 0) return(zeroGrob())
                             data <- flip_data(data, flipped_aes)
 
                             middle <- transform(data, x = xmin, xend = xmax, yend = y,
                                                 linewidth = linewidth * fatten, alpha = NA)
 
-                            has_notch <- suppressWarnings(!is.null(data$ynotchlower) && !is.null(data$ynotchupper) &&
-                                                            !is.na(data$ynotchlower) && !is.na(data$ynotchupper))
+                            # `data` may hold more than one row (e.g. when called
+                            # from GeomArcboxplot), so every test has to be
+                            # vectorised
+                            has_notch <- !is.null(data$ynotchlower) &&
+                              !is.null(data$ynotchupper) &&
+                              all(!is.na(data$ynotchlower)) &&
+                              all(!is.na(data$ynotchupper))
+
+                            # repeat a per-row constant once for each vertex
+                            by_row <- function(x, n) rep(x, each = n)
 
                             if (has_notch) {
-                              if (data$ynotchlower < data$ymin  ||  data$ynotchupper > data$ymax)
+                              if (any(data$ynotchlower < data$ymin | data$ynotchupper > data$ymax, na.rm = TRUE)) {
                                 cli::cli_inform(c(
                                   "Notch went outside hinges",
                                   i = "Do you want {.code notch = FALSE}?"
                                 ))
+                              }
 
                               notchindent <- (1 - data$notchwidth) * (data$xmax - data$xmin) / 2
 
@@ -62,52 +72,52 @@ GeomArcrossbar <- ggproto("GeomArcrossbar", Geom,
                               middle$xend <- middle$xend - notchindent
 
                               box <- data_frame0(
-                                x = c(
+                                x = as.vector(rbind(
                                   data$xmin, data$xmin, data$xmin + notchindent, data$xmin, data$xmin,
                                   data$xmax, data$xmax, data$xmax - notchindent, data$xmax, data$xmax,
                                   data$xmin
-                                ),
-                                y = c(
+                                )),
+                                y = as.vector(rbind(
                                   data$ymax, data$ynotchupper, data$y, data$ynotchlower, data$ymin,
                                   data$ymin, data$ynotchlower, data$y, data$ynotchupper, data$ymax,
                                   data$ymax
-                                ),
-                                alpha = rep(data$alpha, 11),
-                                colour = rep(data$colour, 11),
-                                linewidth = rep(data$linewidth, 11),
-                                linetype = rep(data$linetype, 11),
-                                fill = rep(data$fill, 11),
-                                group = rep(seq_len(nrow(data)), 11),
-                                start = rep(data$start, 11),
-                                end = rep(data$end, 11),
-                                r0 = rep(data$r0, 11),
-                                r1 = rep(data$r1, 11),
-                                clock.wise = rep(data$clock.wise, 11),
-                                sector.bg.fill = rep(data$sector.bg.fill, 11),
-                                sector.bg.col = rep(data$sector.bg.col, 11),
-                                sector.bg.lty = rep(data$sector.bg.lty, 11),
-                                sector.bg.lwd = rep(data$sector.bg.lwd, 11)
+                                )),
+                                alpha = by_row(data$alpha, 11),
+                                colour = by_row(data$colour, 11),
+                                linewidth = by_row(data$linewidth, 11),
+                                linetype = by_row(data$linetype, 11),
+                                fill = by_row(data$fill, 11),
+                                group = by_row(seq_len(nrow(data)), 11),
+                                start = by_row(data$start, 11),
+                                end = by_row(data$end, 11),
+                                r0 = by_row(data$r0, 11),
+                                r1 = by_row(data$r1, 11),
+                                clock.wise = by_row(data$clock.wise, 11),
+                                sector.bg.fill = by_row(data$sector.bg.fill, 11),
+                                sector.bg.col = by_row(data$sector.bg.col, 11),
+                                sector.bg.lty = by_row(data$sector.bg.lty, 11),
+                                sector.bg.lwd = by_row(data$sector.bg.lwd, 11)
                               )
                             } else {
                               # No notch
                               box <- data_frame0(
-                                x = c(data$xmin, data$xmin, data$xmax, data$xmax, data$xmin),
-                                y = c(data$ymax, data$ymin, data$ymin, data$ymax, data$ymax),
-                                alpha = rep(data$alpha, 5),
-                                colour = rep(data$colour, 5),
-                                linewidth = rep(data$linewidth, 5),
-                                linetype = rep(data$linetype, 5),
-                                fill = rep(data$fill, 5),
-                                group = rep(seq_len(nrow(data)), 5), # each bar forms it's own group
-                                start = rep(data$start, 5),
-                                end = rep(data$end, 5),
-                                r0 = rep(data$r0, 5),
-                                r1 = rep(data$r1, 5),
-                                clock.wise = rep(data$clock.wise, 5),
-                                sector.bg.fill = rep(data$sector.bg.fill, 5),
-                                sector.bg.col = rep(data$sector.bg.col, 5),
-                                sector.bg.lty = rep(data$sector.bg.lty, 5),
-                                sector.bg.lwd = rep(data$sector.bg.lwd, 5)
+                                x = as.vector(rbind(data$xmin, data$xmin, data$xmax, data$xmax, data$xmin)),
+                                y = as.vector(rbind(data$ymax, data$ymin, data$ymin, data$ymax, data$ymax)),
+                                alpha = by_row(data$alpha, 5),
+                                colour = by_row(data$colour, 5),
+                                linewidth = by_row(data$linewidth, 5),
+                                linetype = by_row(data$linetype, 5),
+                                fill = by_row(data$fill, 5),
+                                group = by_row(seq_len(nrow(data)), 5), # each bar forms it's own group
+                                start = by_row(data$start, 5),
+                                end = by_row(data$end, 5),
+                                r0 = by_row(data$r0, 5),
+                                r1 = by_row(data$r1, 5),
+                                clock.wise = by_row(data$clock.wise, 5),
+                                sector.bg.fill = by_row(data$sector.bg.fill, 5),
+                                sector.bg.col = by_row(data$sector.bg.col, 5),
+                                sector.bg.lty = by_row(data$sector.bg.lty, 5),
+                                sector.bg.lwd = by_row(data$sector.bg.lwd, 5)
                               )
                             }
 

@@ -7,6 +7,7 @@
 GeomTrackviolin <- ggproto("GeomTrackviolin", GeomArcviolin,
 
                            draw_panel = function(self,data, panel_params, coord,
+                                                 polar.every = FALSE,
                                                  strip.label = TRUE,
                                                  strip.label.pos = c("top","bottom"),
                                                  strip.label.space = 0.15,
@@ -44,9 +45,9 @@ GeomTrackviolin <- ggproto("GeomTrackviolin", GeomArcviolin,
 
                              # label for different facets
                              if(strip.label.pos == "top"){
-                               label.r = unique(data$r1) + strip.label.space
+                               label.r = strip_label_r(unique(data$r1),strip.label.space,add.xaxis)
                              }else{
-                               label.r = unique(data$r0) - strip.label.space
+                               label.r = strip_label_r(unique(data$r0),-strip.label.space,add.yaxis)
                              }
 
                              # whether add xy axis
@@ -79,8 +80,7 @@ GeomTrackviolin <- ggproto("GeomTrackviolin", GeomArcviolin,
                                  if(!panel_params$x$is_discrete()){
                                    xAxis.params <- modifyList(list(xscale = range(data$xmin,data$xmax)),xAxis.params)
                                  }else{
-                                   xAxis.params <- modifyList(list(xscale = range(data$x - unique(data$width)/2,
-                                                                                  data$x + unique(data$width)/2),
+                                   xAxis.params <- modifyList(list(xscale = range(tmp_data$xmin,tmp_data$xmax),
                                                                    breaks = 1:length(new_panel_params$x$breaks),
                                                                    breaks.label = new_panel_params$x$limits),
                                                               xAxis.params)
@@ -225,6 +225,8 @@ GeomTrackviolin <- ggproto("GeomTrackviolin", GeomArcviolin,
 #'
 #' @param mapping Mapping rules for mapping data to visual aesthetics.
 #' @param data A data frame containing the plotting data.
+#' @param polar.every Should the polar axis be drawn for every sector
+#'   (default: FALSE)?
 #' @param stat The name of the statistical transformation.
 #' @param position The name of positioning adjustment.
 #' @param na.rm Whether to remove missing values (default = FALSE).
@@ -259,9 +261,10 @@ GeomTrackviolin <- ggproto("GeomTrackviolin", GeomArcviolin,
 #' @import ggplot2
 #' @export
 geom_trackviolin <- function(mapping = NULL, data = NULL,
-                             stat = "arcydensity", position = "dodge",
+                             stat = "ydensity", position = "dodge",
                              na.rm = FALSE, show.legend = NA,
                              inherit.aes = TRUE,
+                             polar.every = FALSE,
                              strip.label = TRUE,
                              strip.label.pos = c("top","bottom"),
                              strip.label.space = 0.15,
@@ -294,6 +297,7 @@ geom_trackviolin <- function(mapping = NULL, data = NULL,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
     params = list(na.rm = na.rm,
+                  polar.every = polar.every,
                   strip.label = strip.label,
                   strip.label.pos = strip.label.pos,
                   strip.label.space = strip.label.space,

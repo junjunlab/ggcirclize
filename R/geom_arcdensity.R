@@ -1,10 +1,9 @@
-defaults <- function(x, y) c(x, y[setdiff(names(y), names(x))])
-
 #' @rdname ggcirclize-ggproto
 #' @format NULL
 #' @usage NULL
 #' @import ggplot2
 #' @include geom_arcarea.R
+#' @include utilities-ggplot2.R
 #' @export
 GeomArcdensity <- ggproto("GeomArcdensity", GeomArcarea,
                           default_aes = defaults(

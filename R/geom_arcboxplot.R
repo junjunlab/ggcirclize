@@ -93,6 +93,7 @@ GeomArcboxplot <- ggproto("GeomArcboxplot", Geom,
                                                 yAxis.params = list()) {
 
                             data <- check_linewidth(data, snake_class(self))
+                            if (nrow(data) == 0) return(zeroGrob())
                             data <- flip_data(data, flipped_aes)
 
                             # print(flip_data(data, flipped_aes))

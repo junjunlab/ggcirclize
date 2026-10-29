@@ -38,9 +38,9 @@ GeomTracktile <- ggproto("GeomTracktile", GeomArctile,
 
                            # label for different facets
                            if(strip.label.pos == "top"){
-                             label.r = unique(data$r1) + strip.label.space
+                             label.r = strip_label_r(unique(data$r1),strip.label.space,add.xaxis)
                            }else{
-                             label.r = unique(data$r0) - strip.label.space
+                             label.r = strip_label_r(unique(data$r0),-strip.label.space,add.yaxis)
                            }
 
                            # whether add xy axis
@@ -73,8 +73,7 @@ GeomTracktile <- ggproto("GeomTracktile", GeomArctile,
                                  xAxis.params <- modifyList(list(xscale = range(data$x)),xAxis.params)
                                  yAxis.params <- modifyList(list(yscale = range(data$y)),yAxis.params)
                                }else{
-                                 xAxis.params <- modifyList(list(xscale = range(data$x - unique(data$width)/2,
-                                                                                data$x + unique(data$width)/2),
+                                 xAxis.params <- modifyList(list(xscale = range(tmp_data$xmin,tmp_data$xmax),
                                                                  breaks = 1:length(new_panel_params$x$breaks),
                                                                  breaks.label = new_panel_params$x$limits),
                                                             xAxis.params)

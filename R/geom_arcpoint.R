@@ -29,6 +29,9 @@ GeomArcpoint <- ggproto("GeomArcpoint", Geom,
                                               xAxis.params = list(),
                                               yAxis.params = list()) {
 
+                          # empty layer (e.g. a boxplot without outliers) draws nothing
+                          if (is.null(data) || nrow(data) == 0) return(zeroGrob())
+
                           # get xlim and ylim range
                           xlim <- range(data$x)
                           ylim <- range(data$y)

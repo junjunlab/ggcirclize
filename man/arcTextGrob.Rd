@@ -16,10 +16,13 @@ arcTextGrob(
   x0 = 0,
   y0 = 0,
   text.gp = NULL,
+  facing = NULL,
   nice.facing = TRUE,
   inward = FALSE,
   clock.wise = FALSE,
-  curved.label = TRUE,
+  curved.label = FALSE,
+  auto.fit = TRUE,
+  adj = c(0.5, 0.5),
   extend.xscale = 0.05,
   extend.yscale = 0.05,
   xscale = NULL,
@@ -53,17 +56,26 @@ arcTextGrob(
 \item{text.gp}{A graphical parameter object for the text labels' appearance.
 Default is NULL.}
 
-\item{nice.facing}{A logical value indicating whether the labels should face in
-a "nice" direction. Default is TRUE.}
+\item{facing}{Text orientation, see \code{arc_text_geometry()}. When \code{NULL} it is
+derived from \code{curved.label} and \code{inward}.}
 
-\item{inward}{A logical value indicating whether the labels should face inward
-or outward from the center of the arc. Default is FALSE.}
+\item{nice.facing}{Flip labels that would be upside down. Default is TRUE.}
+
+\item{inward}{Put the labels on the inner side of the arc. Default is FALSE.}
 
 \item{clock.wise}{A logical value indicating whether the arc is drawn in a
 clockwise direction. Default is FALSE.}
 
-\item{curved.label}{A logical value indicating whether the labels should be curved
-along the arc. Default is TRUE.}
+\item{curved.label}{Lay the label out character by character along the arc
+(\code{bending.inside}). Default is FALSE.}
+
+\item{auto.fit}{Rotate a label into the radial direction when it is wider
+than the arc it sits on, instead of letting it run into its neighbours.
+Default is TRUE.}
+
+\item{adj}{Justification of the labels, as in \code{\link[grid:grid.text]{grid::textGrob()}}. Useful with
+radial labels: \code{c(0, 0.5)} makes the text grow outwards from its anchor and
+\code{c(1, 0.5)} inwards. Default is \code{c(0.5, 0.5)}.}
 
 \item{extend.xscale}{The extension factor for the scaling of the arc. Default is 0.05.}
 
@@ -83,14 +95,16 @@ along the arc. Default is TRUE.}
 A graphical object of class 'grob'.
 }
 \description{
-This function creates a custom arc text labels graphical object that can be added
-to a plot in R. The text labels are positioned along an arc in a polar coordinate system.
+\code{arcTextGrob()} places labels on an arc. Text orientation follows the same
+vocabulary as \code{circlize::circos.text()}: \code{facing} can be \code{"inside"},
+\code{"outside"}, \code{"clockwise"}, \code{"reverse.clockwise"}, \code{"downward"},
+\code{"bending.inside"} or \code{"bending.outside"}, and \code{nice.facing} flips labels
+that would otherwise be upside down.
 }
 \examples{
 \dontrun{
-# Create arc text labels
-arc_text_labels <- arcTextGrob(x = c(0, 10, 20), y = c(0, 0, 0), labels = c("A", "B", "C"))
-# Add the arc text labels to a plot
+arc_text_labels <- arcTextGrob(x = c(0, 10, 20), y = c(0, 0, 0),
+                               labels = c("A", "B", "C"))
 grid.draw(arc_text_labels)
 }
 

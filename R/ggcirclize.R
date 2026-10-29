@@ -34,16 +34,14 @@ ggcirclize <- function(data = NULL,
                        environment = parent.frame(),
                        ...) {
 
-  mapping <- modifyList(aes(start = 0,end = 180,r0 = 0.5,r1 = 1,
-                            clock.wise = FALSE),
-                        mapping)
+  # user mapping takes priority, arc defaults fill in the missing aesthetics
+  mapping <- merge_mapping(mapping,
+                           aes(start = 0,end = 180,r0 = 0.5,r1 = 1,
+                               clock.wise = FALSE))
 
   p <- ggplot(data = data,
               mapping = mapping,
-              mg.t = mg.t,
-              mg.r = mg.r,
-              mg.b = mg.b,
-              mg.l = mg.l,
+              environment = environment,
               ...)
 
 
@@ -52,7 +50,7 @@ ggcirclize <- function(data = NULL,
     theme(aspect.ratio = 1,
           legend.position = c(1.2,0.5),
           plot.margin = margin(t = mg.t,r = mg.r,b = mg.b,l = mg.l,unit = "cm")) +
-    coord_cartesian(expand = 0,clip = "off",xlim = c(-1,1),ylim = c(-1,1))
+    coord_cartesian(expand = FALSE,clip = "off",xlim = c(-1,1),ylim = c(-1,1))
 
 
   class(p) <- c("ggcirclize", class(p))

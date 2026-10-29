@@ -39,7 +39,7 @@ geom_arcviolin(
 
 \item{data}{The data to be plotted.}
 
-\item{stat}{The statistical transformation to be applied (default: "arcydensity").}
+\item{stat}{The statistical transformation to be applied (default: "ydensity").}
 
 \item{position}{The position adjustment to be applied (default: "dodge").}
 

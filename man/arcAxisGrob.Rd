@@ -2,7 +2,7 @@
 % Please edit documentation in R/arcAxisGrob.R
 \name{arcAxisGrob}
 \alias{arcAxisGrob}
-\title{Create a custom arc axis graphical object.}
+\title{Create a circular axis graphical object}
 \usage{
 arcAxisGrob(
   start = 0,
@@ -15,15 +15,30 @@ arcAxisGrob(
   n = 100,
   clock.wise = FALSE,
   axis.type = c("x", "y"),
-  nice.facing = FALSE,
+  nice.facing = NULL,
   pos = c("left", "right", "top", "bottom"),
   xscale = NULL,
   yscale = c(0, 1),
   breaks.n = 5,
-  minor.ticks.n = 5,
+  minor.ticks.n = NULL,
+  major.by.degree = 20,
   breaks = NULL,
   breaks.label = NULL,
   label.space = NULL,
+  labels = TRUE,
+  labels.cex = 1,
+  labels.facing = NULL,
+  labels.niceFacing = TRUE,
+  labels.col = NULL,
+  labels.font = 1,
+  labels.digits = 3,
+  labels.format = NULL,
+  labels.pos.adjust = NULL,
+  direction = NULL,
+  lwd = NULL,
+  col = NULL,
+  corner.trim = FALSE,
+  pos.adjust = NULL,
   x.gp = NULL,
   y.gp = NULL,
   x.label.gp = gpar(fontsize = 8),
@@ -36,81 +51,103 @@ arcAxisGrob(
 )
 }
 \arguments{
-\item{start}{The starting angle of the arc axis (in degrees). Default is 0.}
+\item{start, end}{Sector limits in degrees.}
 
-\item{end}{The ending angle of the arc axis (in degrees). Default is 60.}
+\item{r0, r1}{Inner and outer radius of the track.}
 
-\item{r0}{The inner radius of the arc axis. Default is 0.5.}
+\item{x0, y0}{Centre of the unit circle.}
 
-\item{r1}{The outer radius of the arc axis. Default is 1.}
+\item{ticks.len}{Length of the major ticks. Defaults to \code{0.03} for the
+angular axis and \code{3} for the radial axis.}
 
-\item{x0}{The x-coordinate of the center of the unit circle. Default is 0.}
+\item{n}{Number of points used to approximate the arc.}
 
-\item{y0}{The y-coordinate of the center of the unit circle. Default is 0.}
+\item{clock.wise}{Whether the sector is drawn clockwise.}
 
-\item{ticks.len}{The length of the tick marks along the arc axis. Default is NULL.}
+\item{axis.type}{Either \code{"x"} (angular axis) or \code{"y"} (radial axis).}
 
-\item{n}{The number of ticks to be drawn along the arc axis. Default is 100.}
+\item{nice.facing}{Deprecated, use \code{labels.niceFacing}.}
 
-\item{clock.wise}{A logical value indicating whether the arc axis should be
-drawn clockwise. Default is FALSE.}
+\item{pos}{Where the axis sits: \code{"top"}/\code{"bottom"} for an angular axis,
+\code{"left"}/\code{"right"} for a radial axis.}
 
-\item{axis.type}{A character string specifying the type of the axis ('x' or 'y').
-Default is 'x'.}
+\item{xscale, yscale}{Data range the axis covers.}
 
-\item{nice.facing}{A logical value indicating whether tick labels should be
-nicely aligned. Default is FALSE.}
+\item{breaks.n}{Approximate number of major breaks when \code{breaks} is \code{NULL}.}
 
-\item{pos}{The position of the arc axis ('left', 'right', 'top', or 'bottom').
-Default is 'left'.}
+\item{minor.ticks.n}{Number of minor ticks between two major ticks. When
+\code{NULL} (default) the angular axis uses 5 and the radial axis uses 0, which
+mirrors \code{circlize} (\code{circos.yaxis()} draws no minor ticks).}
 
-\item{xscale}{The scaling factor for the x-axis. Default is NULL.}
+\item{major.by.degree}{Minimal angular distance, in degrees, between two
+major ticks. Break positions are derived from it and then rounded to a
+readable interval, exactly like \code{circos.par("major.by.degree")} does. Set
+it to \code{NULL} to fall back to \code{breaks.n} pretty breaks.}
 
-\item{yscale}{The scaling range for the y-axis. Default is c(0, 1).}
+\item{breaks}{Major tick positions. Defaults to pretty breaks of the scale.}
 
-\item{breaks.n}{The number of major tick marks to be drawn. Default is 5.}
+\item{breaks.label}{Labels for the major ticks. Defaults to the formatted
+break values.}
 
-\item{minor.ticks.n}{The number of minor tick marks to be drawn between major
-ticks. Default is 5.}
+\item{label.space}{Gap between a tick and its label.}
 
-\item{breaks}{A vector specifying the positions of major tick marks. Default is NULL.}
+\item{labels}{Draw labels at all. Can also be a logical vector, as in
+circlize.}
 
-\item{breaks.label}{A vector of labels for major tick marks. Default is NULL.}
+\item{labels.cex}{Size multiplier for the axis labels.}
 
-\item{label.space}{The space between tick labels and the axis. Default is NULL.}
+\item{labels.facing}{Text orientation, see \code{arc_text_geometry()}. Defaults to
+\code{"inside"}, i.e. reading along the arc.}
 
-\item{x.gp}{A graphical parameter object for the x-axis. Default is NULL.}
+\item{labels.niceFacing}{Flip labels that would be upside down.}
 
-\item{y.gp}{A graphical parameter object for the y-axis. Default is NULL.}
+\item{labels.col}{Colour of the axis labels.}
 
-\item{x.label.gp}{A graphical parameter object for x-axis labels. Default is gpar(fontsize = 8).}
+\item{labels.font}{Font face of the axis labels.}
 
-\item{y.label.gp}{A graphical parameter object for y-axis labels. Default is gpar(fontsize = 8).}
+\item{labels.digits}{Significant digits used when formatting the break values.}
 
-\item{extend.xscale}{The extension factor for the x-axis. Default is 0.05.}
+\item{labels.format}{Optional function used to format the break values, for
+example \code{function(x) paste0(x / 1e6, "Mb")}.}
 
-\item{extend.yscale}{The extension factor for the y-axis. Default is 0.05.}
+\item{labels.pos.adjust}{Nudge the first and the last label inwards when they
+overhang the sector, the same way \code{circlize::circos.axis()}'s
+\code{labels.pos.adjust} does.}
 
-\item{name}{The name of the arc axis. Default is NULL.}
+\item{direction}{\code{"outside"} (default) or \code{"inside"}; overrides the side
+implied by \code{pos}.}
 
-\item{gp}{A graphical parameter object for the arc axis. Default is NULL.}
+\item{lwd, col}{Line width and colour of the axis line, ticks and labels.}
 
-\item{vp}{A viewport object for the arc axis. Default is NULL.}
+\item{corner.trim}{Drop the outermost radial label, for when an angular axis
+is drawn on the same sector and both labels would collide in the corner.}
+
+\item{pos.adjust}{Deprecated, use \code{labels.pos.adjust}.}
+
+\item{x.gp, y.gp}{Graphical parameters for the axis line and ticks.}
+
+\item{x.label.gp, y.label.gp}{Graphical parameters for the labels.}
+
+\item{extend.xscale, extend.yscale}{Fraction of the sector kept free at both
+ends.}
+
+\item{name, gp, vp}{Standard grid graphical object arguments.}
 }
 \value{
-A graphical object of class 'grob'.
+A \code{grob} of class \code{arcAxisGrob}.
 }
 \description{
-This function creates a custom arc axis graphical object that can be added to
-a plot in R. The arc axis can be used to display data along a curved axis,
-such as a circular or radial axis.
+\code{arcAxisGrob()} draws an axis along an arc or along a radius, in the same
+spirit as \code{circlize::circos.axis()} / \code{circlize::circos.yaxis()}. Argument
+names follow circlize where it makes sense (\code{labels.cex}, \code{labels.facing},
+\code{labels.niceFacing}, \code{labels.col}, \code{labels.font}, \code{labels.digits},
+\code{labels.pos.adjust}), so a plot can be tuned with the vocabulary you already
+know from circlize.
 }
 \examples{
 \dontrun{
-# Create an arc axis
-arc_axis <- arcAxisGrob(start = 0, end = 180, r0 = 0.5, r1 = 1, axis.type = "x",pos = "top")
-# Add the arc axis to a plot
-grid.draw(arc_axis)
+grid.draw(arcAxisGrob(start = 0, end = 120, r0 = 0.7, r1 = 1,
+                      axis.type = "x", pos = "top"))
 }
 
 }

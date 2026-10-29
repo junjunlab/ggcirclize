@@ -136,8 +136,8 @@ makeContent.arcPointGrob <- function(x){
     theta <- scales::rescale(x,to = 2*pi - range(as.radian(start_ed),as.radian(end_ed)),
                              from = thata.scale)
   }else{
-    theta <- scales::rescale(x,to = range(as.radian(end_ed),as.radian(start_ed)),
-                             from = rev(thata.scale))
+    theta <- scales::rescale(x,to = range(as.radian(start_ed),as.radian(end_ed)),
+                             from = thata.scale)
   }
 
   xp0 <- x0 + r*cos(theta)

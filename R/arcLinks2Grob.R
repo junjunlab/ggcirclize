@@ -120,9 +120,7 @@ makeContent.arcLinks2Grob <- function(x){
     xm <- scales::rescale(xm,to = c(0,1),from = c(-1,1))
     ym <- scales::rescale(ym,to = c(0,1),from = c(-1,1))
 
-    res <- DescTools::DrawBezier(plot = F,
-                                 x = c(xf[1],xm,xm,xt[2]),
-                                 y = c(yf[1],ym,ym,yt[2]))
+    res <- bezier_points(c(xf[1],xm,xm,xt[2]),c(yf[1],ym,ym,yt[2]))
 
     bz.grob <- linesGrob(x = res$x,y = res$y,
                          default.units = "npc",
@@ -173,9 +171,7 @@ makeContent.arcLinks2Grob <- function(x){
     # curve1.x <- convertUnit(bezier$x,unitTo = "native")
     # curve1.y <- convertUnit(bezier$y,unitTo = "native")
 
-    bezier <- DescTools::DrawBezier(plot = F,
-                                    x = c(x.f[1],xm,xm,x.t[2]),
-                                    y = c(y.f[1],ym,ym,y.t[2]))
+    bezier <- bezier_points(c(x.f[1],xm,xm,x.t[2]),c(y.f[1],ym,ym,y.t[2]))
 
     curve1.x <- bezier$x
     curve1.y <- bezier$y
@@ -202,9 +198,7 @@ makeContent.arcLinks2Grob <- function(x){
     # bzgrob <- bezierGrob(c(x[1],x0,x0,x[2]),c(y[1],y0,y0,y[2]),default.units = "native")
     # bezier <- bezierPoints(bzgrob)
 
-    bezier <- DescTools::DrawBezier(plot = F,
-                                    x = c(x.f[1],xm,xm,x.t[2]),
-                                    y = c(y.f[1],ym,ym,y.t[2]))
+    bezier <- bezier_points(c(x.f[1],xm,xm,x.t[2]),c(y.f[1],ym,ym,y.t[2]))
 
     curve2.x <- bezier$x
     curve2.y <- bezier$y

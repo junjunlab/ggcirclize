@@ -40,6 +40,18 @@ GeomTrackboxplot <- ggproto("GeomTrackboxplot", GeomArcboxplot,
                               scales <- match.arg(scales,c("fixed","free","free_x","free_y"))
                               space <- match.arg(space,c("free_x","fixed"))
 
+                              # width of a single boxplot, used to expand discrete
+                              # scale ranges. `new_width` was never created for this
+                              # layer, so derive it from the stat output.
+                              data$box_width <- if (!is.null(data$new_width)) {
+                                data$new_width
+                              } else if (all(c("xmin","xmax") %in% names(data))) {
+                                data$xmax - data$xmin
+                              } else {
+                                rep(0.9, nrow(data))
+                              }
+                              box_width <- median(data$box_width, na.rm = TRUE)
+
                               # calculate sector theta
                               sec_df = facet_sector(data = data,sector.gap = sector.gap,space = space)
 
@@ -50,9 +62,9 @@ GeomTrackboxplot <- ggproto("GeomTrackboxplot", GeomArcboxplot,
 
                               # label for different facets
                               if(strip.label.pos == "top"){
-                                label.r = unique(data$r1) + strip.label.space
+                                label.r = strip_label_r(unique(data$r1),strip.label.space,add.xaxis)
                               }else{
-                                label.r = unique(data$r0) - strip.label.space
+                                label.r = strip_label_r(unique(data$r0),-strip.label.space,add.yaxis)
                               }
 
                               # whether add xy axis
@@ -89,8 +101,8 @@ GeomTrackboxplot <- ggproto("GeomTrackboxplot", GeomArcboxplot,
                                   if(!panel_params$x$is_discrete()){
                                     xAxis.params <- modifyList(list(xscale = range(data$xmin,data$xmax)),xAxis.params)
                                   }else{
-                                    xAxis.params <- modifyList(list(xscale = range(data$x - unique(data$new_width)/2,
-                                                                                   data$x + unique(data$new_width)/2),
+                                    xAxis.params <- modifyList(list(xscale = range(data$x - box_width/2,
+                                                                                   data$x + box_width/2),
                                                                     breaks = 1:length(new_panel_params$x$breaks),
                                                                     breaks.label = new_panel_params$x$limits),
                                                                xAxis.params)
@@ -100,8 +112,8 @@ GeomTrackboxplot <- ggproto("GeomTrackboxplot", GeomArcboxplot,
                                   if(!panel_params$y$is_discrete()){
                                     yAxis.params <- modifyList(list(yscale = range(data$ymin_final,data$ymax_final)),yAxis.params)
                                   }else{
-                                    yAxis.params <- modifyList(list(yscale = range(data$y - unique(data$new_width)/2,
-                                                                                   data$y + unique(data$new_width)/2),
+                                    yAxis.params <- modifyList(list(yscale = range(data$y - box_width/2,
+                                                                                   data$y + box_width/2),
                                                                     breaks = 1:length(new_panel_params$y$breaks),
                                                                     breaks.label = new_panel_params$y$limits),
                                                                yAxis.params)
@@ -114,16 +126,16 @@ GeomTrackboxplot <- ggproto("GeomTrackboxplot", GeomArcboxplot,
                                     new_panel_params$x$limits <- all_limits.x[unique(tmp_data$x)]
                                     tmp_data$x <- rep(1:length(unique(tmp_data$x)),
                                                       table(tmp_data$x))
-                                    tmp_data$xmin <- tmp_data$x - tmp_data$new_width/2
-                                    tmp_data$xmax <- tmp_data$x + tmp_data$new_width/2
+                                    tmp_data$xmin <- tmp_data$x - tmp_data$box_width/2
+                                    tmp_data$xmax <- tmp_data$x + tmp_data$box_width/2
                                     new_panel_params$x.range <- range(tmp_data$xmin,tmp_data$xmax)
 
                                     yAxis.params <- modifyList(list(yscale = range(data$ymin_final,data$ymax_final)),
                                                                yAxis.params)
                                   }else{
                                     new_panel_params$x.range <- range(tmp_data$xmin,tmp_data$xmax)
-                                    yAxis.params <- modifyList(list(yscale = range(data$y - unique(data$new_width)/2,
-                                                                                   data$y + unique(data$new_width)/2)),
+                                    yAxis.params <- modifyList(list(yscale = range(data$y - box_width/2,
+                                                                                   data$y + box_width/2)),
                                                                yAxis.params)
                                   }
                                 }else if(scales == "free_y"){
@@ -136,16 +148,16 @@ GeomTrackboxplot <- ggproto("GeomTrackboxplot", GeomArcboxplot,
                                     new_panel_params$y$limits <- all_limits.y[unique(tmp_data$y)]
                                     tmp_data$y <- rep(1:length(unique(tmp_data$y)),
                                                       table(tmp_data$y))
-                                    tmp_data$ymin <- tmp_data$y - tmp_data$new_width/2
-                                    tmp_data$ymax <- tmp_data$y + tmp_data$new_width/2
+                                    tmp_data$ymin <- tmp_data$y - tmp_data$box_width/2
+                                    tmp_data$ymax <- tmp_data$y + tmp_data$box_width/2
                                     new_panel_params$y.range <- range(tmp_data$ymin,tmp_data$ymax)
 
                                     xAxis.params <- modifyList(list(xscale = range(data$xmin_final,data$xmax_final)),
                                                                xAxis.params)
                                   }else{
                                     new_panel_params$y.range <- range(tmp_data$ymin_final,tmp_data$ymax_final)
-                                    xAxis.params <- modifyList(list(xscale = range(data$x - unique(data$new_width)/2,
-                                                                                   data$x + unique(data$new_width)/2)),
+                                    xAxis.params <- modifyList(list(xscale = range(data$x - box_width/2,
+                                                                                   data$x + box_width/2)),
                                                                xAxis.params)
                                   }
                                 }else if(scales == "free"){
@@ -156,8 +168,8 @@ GeomTrackboxplot <- ggproto("GeomTrackboxplot", GeomArcboxplot,
                                     new_panel_params$x$limits <- all_limits.x[unique(tmp_data$x)]
                                     tmp_data$x <- rep(1:length(unique(tmp_data$x)),
                                                       table(tmp_data$x))
-                                    tmp_data$xmin <- tmp_data$x - tmp_data$new_width/2
-                                    tmp_data$xmax <- tmp_data$x + tmp_data$new_width/2
+                                    tmp_data$xmin <- tmp_data$x - tmp_data$box_width/2
+                                    tmp_data$xmax <- tmp_data$x + tmp_data$box_width/2
                                     new_panel_params$x.range <- range(tmp_data$xmin,tmp_data$xmax)
                                   }
 
@@ -168,8 +180,8 @@ GeomTrackboxplot <- ggproto("GeomTrackboxplot", GeomArcboxplot,
                                     new_panel_params$y$limits <- all_limits.y[unique(tmp_data$y)]
                                     tmp_data$y <- rep(1:length(unique(tmp_data$y)),
                                                       table(tmp_data$y))
-                                    tmp_data$ymin <- tmp_data$y - tmp_data$new_width/2
-                                    tmp_data$ymax <- tmp_data$y + tmp_data$new_width/2
+                                    tmp_data$ymin <- tmp_data$y - tmp_data$box_width/2
+                                    tmp_data$ymax <- tmp_data$y + tmp_data$box_width/2
                                     new_panel_params$y.range <- range(tmp_data$ymin,tmp_data$ymax)
                                   }
                                 }

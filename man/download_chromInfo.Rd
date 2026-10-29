@@ -4,13 +4,20 @@
 \alias{download_chromInfo}
 \title{Download Chromosome Information Data}
 \usage{
-download_chromInfo(genome = "hg19")
+download_chromInfo(genome = "hg19", dir = ".", overwrite = FALSE)
 }
 \arguments{
 \item{genome}{The name of the genome (default: "hg19").}
+
+\item{dir}{Directory in which the files are stored (default: the current
+working directory).}
+
+\item{overwrite}{Should existing files be downloaded again (default: FALSE).}
 }
 \value{
-Downloads chromosome size and cytoband data for the specified genome.
+Invisibly, a character vector with the paths of the downloaded files.
+The chromosome size file is stored as \verb{<genome>.chrom.sizes} and the
+cytoband file as \verb{<genome>.cytoBandIdeo.txt.gz}.
 }
 \description{
 This function downloads chromosome size and cytoband data for a specified

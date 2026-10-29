@@ -58,7 +58,14 @@ GeomArcribbon <- ggproto("GeomArcribbon", Geom,
                            data <- check_linewidth(data, snake_class(self))
                            data <- flip_data(data, flipped_aes)
                            if (na.rm) data <- data[stats::complete.cases(data[c("x", "ymin", "ymax")]), ]
-                           data <- data[order(data$group), ]
+
+                           # A discrete x splits the default group per x level, which turns
+                           # the ribbon into one-point polygons that draw nothing.
+                           if (isTRUE(try(panel_params$x$is_discrete(), silent = TRUE))) {
+                             data <- arc_regroup_ribbon(data)
+                           }
+
+                           data <- data[order(data$group, data$x), ]
 
                            tmpdata <- data
 
@@ -184,9 +191,12 @@ GeomArcribbon <- ggproto("GeomArcribbon", Geom,
                            }
 
 
-                           # update xaxis params
-                           arcxAxisGrob.params <- modifyList(list(xscale = xlim),xAxis.params)
-                           arcyAxisGrob.params <- modifyList(list(yscale = ylim),yAxis.params)
+          # update xaxis params
+          disc.x <- arc_discrete_axis_params(panel_params$x)
+          disc.y <- arc_discrete_axis_params(panel_params$y)
+
+          arcxAxisGrob.params <- modifyList(modifyList(list(xscale = xlim),disc.x %||% list()),xAxis.params)
+          arcyAxisGrob.params <- modifyList(modifyList(list(yscale = ylim),disc.y %||% list()),yAxis.params)
 
 
                            # draw grobs

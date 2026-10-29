@@ -15,7 +15,7 @@ geom_trackgenomiclabel2(
   chrom_data = NULL,
   keep.all.chrom = FALSE,
   link_pos = c("top", "bottom"),
-  link_r = 0.1,
+  link_r = 0.09,
   link_col = NULL,
   strip.label = TRUE,
   strip.label.pos = c("top", "bottom"),
@@ -59,7 +59,7 @@ chromosomes in the plot (default: FALSE).}
 
 \item{link_pos}{Position of links ("top" or "bottom") (default: c("top", "bottom")).}
 
-\item{link_r}{Radius of links (default: 0.1).}
+\item{link_r}{Radius of links (default: 0.09).}
 
 \item{link_col}{Color of links (default: NULL).}
 

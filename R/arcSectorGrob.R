@@ -196,7 +196,9 @@ makeContent.arcSectorGrob <- function(x){
                                                       extend.xscale = yaxis.extend.xscale,
                                                       extend.yscale = yaxis.extend.yscale,
                                                       clock.wise = clock.wise,
-                                                      axis.type = "y",pos = "left"),
+                                                      axis.type = "y",pos = "left",
+                                                      # x 轴同时存在时，省掉拐角处的径向标签
+                                                      corner.trim = isTRUE(add.xaxis)),
                                                  arcyAxisGrob.params))
   }else{
     yaxis.grob <- nullGrob()

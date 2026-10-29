@@ -80,8 +80,10 @@ GeomGenomicNestedZoom <- ggproto("GeomGenomicNestedZoom", Geom,
                                      }else if(is.data.frame(get(gm))){
                                        chrom_data <- get(gm)
                                      }else{
-                                       message("Please supply a data frame includes chromsome length or
-                                               genome version(hg38,hg19,mm39,mm10,mm9).")
+                                       cli::cli_abort(c(
+                                         "Please supply {.arg chrom_data}: a data frame with chromosome lengths",
+                                         "i" = "or use a supported {.field genome} (hg38, hg19, mm39, mm10, mm9)."
+                                       ))
                                      }
                                    }
 
@@ -112,9 +114,9 @@ GeomGenomicNestedZoom <- ggproto("GeomGenomicNestedZoom", Geom,
 
                                    # label for different facets
                                    if(strip.label.pos == "top"){
-                                     label.r = unique(data$r1) + strip.label.space
+                                     label.r = strip_label_r(unique(data$r1),strip.label.space,add.xaxis)
                                    }else{
-                                     label.r = unique(data$r0) - strip.label.space
+                                     label.r = strip_label_r(unique(data$r0),-strip.label.space,add.yaxis)
                                    }
                                    # ====================================================
                                    # calculate zoom sector theta
@@ -212,7 +214,9 @@ GeomGenomicNestedZoom <- ggproto("GeomGenomicNestedZoom", Geom,
                                    if(is.null(nested_fill)){
                                      zoom_data$nested_fill <- rep("white",nrow(zoom_data))
                                    }else{
-                                     zoom_data$nested_fill <- rep(nested_fill,table(zoom_data$chr))
+                                     # one colour per chromosome (or a single colour for all)
+                                     cnt <- as.integer(table(zoom_data$chr))
+                                     zoom_data$nested_fill <- rep(rep_len(nested_fill, length(cnt)), cnt)
                                    }
 
                                    # generate grobs
@@ -232,10 +236,9 @@ GeomGenomicNestedZoom <- ggproto("GeomGenomicNestedZoom", Geom,
 
                                      tmp_data <- data[which(data$chr == zoom_chr[sec]),]
 
-                                     # print(zoom_chr_data)
-                                     # print(sec_tmp)
-                                     # print(head(tmp_data))
-                                     # break
+                                     # nothing to draw when the zoom region is not
+                                     # part of the plotted chromosomes
+                                     if (nrow(zoom_chr_data) == 0 || nrow(tmp_data) == 0) next
 
                                      # ==============================================================================
                                      # args
@@ -314,6 +317,11 @@ GeomGenomicNestedZoom <- ggproto("GeomGenomicNestedZoom", Geom,
                                      # ==============================================================================
                                      # genreate grobs
                                      # ==============================================================================
+
+                                     # center of the unit circle (used for the polar
+                                     # to cartesian conversion below)
+                                     x0 <- 0
+                                     y0 <- 0
 
                                      # loop to draw
                                      # ii = 1

@@ -52,9 +52,9 @@ GeomTrackrect <- ggproto("GeomTrackrect", GeomArcrect,
 
                            # label for different facets
                            if(strip.label.pos == "top"){
-                             label.r = unique(data$r1) + strip.label.space
+                             label.r = strip_label_r(unique(data$r1),strip.label.space,add.xaxis)
                            }else{
-                             label.r = unique(data$r0) - strip.label.space
+                             label.r = strip_label_r(unique(data$r0),-strip.label.space,add.yaxis)
                            }
 
                            # whether add xy axis

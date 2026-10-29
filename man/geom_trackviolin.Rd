@@ -7,11 +7,12 @@
 geom_trackviolin(
   mapping = NULL,
   data = NULL,
-  stat = "arcydensity",
+  stat = "ydensity",
   position = "dodge",
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE,
+  polar.every = FALSE,
   strip.label = TRUE,
   strip.label.pos = c("top", "bottom"),
   strip.label.space = 0.15,
@@ -51,6 +52,9 @@ geom_trackviolin(
 \item{show.legend}{Whether to display the legend (default = NA).}
 
 \item{inherit.aes}{Whether to inherit aesthetics from the parent layer (default = TRUE).}
+
+\item{polar.every}{Should the polar axis be drawn for every sector
+(default: FALSE)?}
 
 \item{strip.label}{Whether to display track labels (default = TRUE).}
 

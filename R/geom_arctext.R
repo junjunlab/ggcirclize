@@ -38,14 +38,15 @@ GeomArctext <- ggproto("GeomArctext", Geom,
 
                          # color for labels
                          if(curved.label == TRUE){
-                           text.col <- rep(data$colour ,nchar(data$label))
+                           # one colour per character, `label` may be non-character
+                           text.col <- rep(data$colour, times = nchar(as.character(data$label)))
                          }else{
                            text.col <- data$colour
                          }
 
                          # grob
                          arcTextGrob(x = data$x,y = data$y,
-                                     labels = data$label,
+                                     labels = as.character(data$label),
                                      shift = shift,
                                      curved.label = curved.label,
                                      start = unique(data$start),
@@ -55,7 +56,7 @@ GeomArctext <- ggproto("GeomArctext", Geom,
                                      yscale = arcyAxisGrob.params$yscale,
                                      text.gp = gpar(
                                        col = alpha(text.col, unique(data$alpha)),
-                                       fontsize = data$size,
+                                       fontsize = data$size * .pt,
                                        fontfamily = data$family,
                                        fontface = data$fontface),
                                      extend.xscale = extend.xscale,

@@ -41,11 +41,16 @@ GeomArctile <- ggproto("GeomArctile", GeomArcrect,
                                              add.yaxis = TRUE,
                                              xAxis.params = list(),
                                              yAxis.params = list(),
+                                             tile.margin = 0.03,
                                              lineend = "butt", linejoin = "round") {
 
-                         # get xlim and ylim range
-                         xlim <- range(data$x - unique(data$width)/2,data$x + unique(data$width)/2)
-                         ylim <- range(data$y - unique(data$width)/2,data$y + unique(data$width)/2)
+                         # 直接用将要绘制的矩形边界，保证刻度和图形用的是同一套范围
+                         xlim <- range(data$xmin,data$xmax,na.rm = TRUE)
+                         ylim <- range(data$ymin,data$ymax,na.rm = TRUE)
+
+                         # 留一点内边距，避免色块正好压在扇区边界上
+                         xlim <- xlim + c(-1,1)*diff(xlim)*tile.margin
+                         ylim <- ylim + c(-1,1)*diff(ylim)*tile.margin
 
                          # add tile x labels
                          if(panel_params$x$is_discrete()){
@@ -72,6 +77,13 @@ GeomArctile <- ggproto("GeomArctile", GeomArcrect,
                            breaks.y = NULL
                            breaks.label.y = NULL
                          }
+
+                         # 绘制范围必须能装下所有矩形，否则两端的色块会被外推到
+                         # 扇区之外（上游传进来的 xscale/yscale 可能只覆盖了中心点）
+                         xAxis.params <- resize_scale_param(xAxis.params,"xscale",
+                                                            data$xmin,data$xmax,xlim)
+                         yAxis.params <- resize_scale_param(yAxis.params,"yscale",
+                                                            data$ymin,data$ymax,ylim)
 
                          # update xaxis params
                          arcxAxisGrob.params <- modifyList(list(xscale = xlim,

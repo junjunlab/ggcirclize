@@ -21,20 +21,33 @@ as.theta <- function(radian) {
 }
 
 
-# add suitble suffix for a value
+# add suitable suffix for a value (bp / Kb / Mb)
+#
+# 单位必须按整根轴统一：原来逐值判断，导致同一根轴上出现 "0bp" 和 "150Mb"
+# 混排。现在先看整根轴的最大值选单位，再统一格式化。
 addsuffix <- function(value = NULL){
-  fun <- function(val){
-    if(val <= 10^3){
-      labels <- paste0(val,"bp")
-    }else if(val >= 10^3 & val <= 10^6){
-      labels <- paste0(val/10^3,"Kb")
-    }else{
-      labels <- paste0(val/10^6,"Mb")
-    }
+  if(is.null(value)) return(character(0))
+
+  v <- abs(value)
+  mx <- suppressWarnings(max(v, na.rm = TRUE))
+  if(!is.finite(mx)) mx <- 0
+
+  fmt <- function(x, div, unit){
+    out <- format(round(x/div, 2), trim = TRUE, scientific = FALSE)
+    out <- sub("\\.0+$", "", trimws(out))   # 1.0 -> 1, 0.0 -> 0
+    out[is.na(x)] <- NA_character_
+    paste0(out, unit)
   }
 
-  sapply(value,FUN = fun)
+  if(mx < 10^3){
+    fmt(value, 1, "bp")
+  }else if(mx < 10^6){
+    fmt(value, 10^3, "Kb")
+  }else{
+    fmt(value, 10^6, "Mb")
+  }
 }
+
 
 #' Download Chromosome Information Data
 #'
@@ -42,8 +55,13 @@ addsuffix <- function(value = NULL){
 #' genome from the UCSC Genome Browser.
 #'
 #' @param genome The name of the genome (default: "hg19").
+#' @param dir Directory in which the files are stored (default: the current
+#'   working directory).
+#' @param overwrite Should existing files be downloaded again (default: FALSE).
 #'
-#' @return Downloads chromosome size and cytoband data for the specified genome.
+#' @return Invisibly, a character vector with the paths of the downloaded files.
+#'   The chromosome size file is stored as `<genome>.chrom.sizes` and the
+#'   cytoband file as `<genome>.cytoBandIdeo.txt.gz`.
 #'
 #' @examples
 #' \dontrun{
@@ -52,32 +70,71 @@ addsuffix <- function(value = NULL){
 #' }
 #'
 #' @export
-download_chromInfo <- function(genome = "hg19"){
-  url_chromsize <- paste0("https://hgdownload.soe.ucsc.edu/goldenPath/",
-                          genome,
-                          "/bigZips/",genome,".chrom.sizes")
+download_chromInfo <- function(genome = "hg19",dir = ".",overwrite = FALSE){
+  if(!is.character(genome) || length(genome) != 1 || is.na(genome)){
+    stop("`genome` must be a single genome name, e.g. \"hg19\".",call. = FALSE)
+  }
 
-  download.file(url = url_chromsize,destfile = "./")
+  if(!dir.exists(dir)){
+    dir.create(dir,recursive = TRUE,showWarnings = FALSE)
+  }
 
-  url_cytoband <- paste0("https://hgdownload.cse.ucsc.edu/goldenPath/",
-                         genome,"/database/cytoBandIdeo.txt.gz")
+  files <- c(
+    chromsize = file.path(dir,paste0(genome,".chrom.sizes")),
+    cytoband = file.path(dir,paste0(genome,".cytoBandIdeo.txt.gz"))
+  )
 
-  download.file(url = url_cytoband,destfile = "./")
+  urls <- c(
+    chromsize = paste0("https://hgdownload.soe.ucsc.edu/goldenPath/",
+                       genome,"/bigZips/",genome,".chrom.sizes"),
+    cytoband = paste0("https://hgdownload.soe.ucsc.edu/goldenPath/",
+                      genome,"/database/cytoBandIdeo.txt.gz")
+  )
+
+  for(i in seq_along(files)){
+    if(file.exists(files[i]) && !overwrite){
+      message("File already exists, skipping: ",files[i])
+      next
+    }
+
+    tryCatch(
+      utils::download.file(url = urls[i],destfile = files[i],mode = "wb",
+                           quiet = TRUE),
+      error = function(e){
+        stop("Failed to download ",urls[i],": ",conditionMessage(e),call. = FALSE)
+      }
+    )
+  }
+
+  invisible(unname(files))
 }
 
 
 
+#' Create a page for arc graphics
+#'
 #' @description
 #' A simple viewport to be created to plot arc graphics.
 #'
+#' @param width,height Width and height of the viewport, as a fraction of the
+#'   device size (default: 0.9).
+#' @param circle Should a background circle be drawn (default: TRUE)?
+#' @param circle.gp Graphical parameters used for the background circle.
+#'
 #' @export
 #' @import grid
-newpage <- function(){
+newpage <- function(width = 0.9,height = 0.9,circle = TRUE,
+                    circle.gp = gpar(fill = "grey95",col = NA)){
   grid.newpage()
-  pushViewport(viewport(width = 0.9,height = 0.9,
+  pushViewport(viewport(width = width,height = height,
                         xscale = c(-1,1),yscale = c(-1,1),
                         default.units = "snpc"))
-  grid.circle(r = 0.5,gp = gpar(fill = "grey95",col = NA))
+
+  if(isTRUE(circle)){
+    grid.circle(r = 0.5,gp = circle.gp)
+  }
+
+  invisible(NULL)
 }
 
 
@@ -160,16 +217,24 @@ get_order_name <- function(from,all_name,all_from,shift = 0){
 #'
 #' @export
 get_symmetric_val <- function(mat = NULL,keep.diag = TRUE){
-  diag <- ifelse(keep.diag == TRUE,FALSE,TRUE)
+  if(is.null(mat) || !is.matrix(mat)){
+    stop("`mat` must be a matrix.",call. = FALSE)
+  }
 
-  logi <- upper.tri(mat,diag = diag)
-  mat[logi] <- "heiheihei"
-  mat_long <- reshape2::melt(mat)
-  colnames(mat_long) <- c("from","to","value")
-  mat_long <- subset(mat_long,value != "heiheihei")
-  mat_long$value <- as.numeric(mat_long$value)
+  rn <- rownames(mat) %||% as.character(seq_len(nrow(mat)))
+  cn <- colnames(mat) %||% as.character(seq_len(ncol(mat)))
 
-  return(mat_long)
+  # take one triangle only (both triangles mirrored would double the links)
+  idx <- if(isTRUE(keep.diag)) upper.tri(mat,diag = TRUE) else upper.tri(mat,diag = FALSE)
+
+  out <- data.frame(
+    from = rn[row(mat)[idx]],
+    to = cn[col(mat)[idx]],
+    value = as.numeric(mat[idx]),
+    stringsAsFactors = FALSE
+  )
+
+  return(out)
 }
 
 
@@ -197,8 +262,12 @@ get_symmetric_val <- function(mat = NULL,keep.diag = TRUE){
 #'
 #' @rdname bedMatTolong
 bedMatTolong <- function(bed.mat = NULL,retain.var = NULL){
+  if(is.null(bed.mat) || !is.data.frame(bed.mat)){
+    stop("`bed.mat` must be a data.frame.",call. = FALSE)
+  }
+
   bed.mat <- bed.mat[order(bed.mat$chr,bed.mat$start),]
-  x <- as.numeric(unlist(lapply(table(bed.mat$chr), function(x) 1:x)))
+  x <- as.numeric(unlist(lapply(table(bed.mat$chr), function(x) seq_len(x))))
   bed.mat$x <- x
 
   if(is.null(retain.var)){
@@ -207,7 +276,15 @@ bedMatTolong <- function(bed.mat = NULL,retain.var = NULL){
     id.vars <- c("chr","start","end","x",retain.var)
   }
 
-  bed_long <- reshape2::melt(bed.mat,id.vars = id.vars)
+  # columns left over after the id columns are the values that get melted
+  measure.vars <- setdiff(colnames(bed.mat),id.vars)
+  if(length(measure.vars) == 0){
+    stop("`bed.mat` must contain at least one value column besides ",
+         "'chr', 'start' and 'end'.",call. = FALSE)
+  }
+
+  bed_long <- reshape2::melt(bed.mat,id.vars = id.vars,
+                             measure.vars = measure.vars)
   bed_long$y <- as.numeric(bed_long$variable)
 
   return(bed_long)
@@ -265,8 +342,11 @@ addMarkers <- function(object = NULL,
 
   # check class
   if(!inherits(object,"pheatmap")){
-    message("Please supply pheatmap output.")
-    stop()
+    stop("Please supply a pheatmap output.",call. = FALSE)
+  }
+
+  if(is.null(mark.label)){
+    stop("`mark.label` must not be NULL.",call. = FALSE)
   }
 
   # get gene names
@@ -330,22 +410,24 @@ addMarkers <- function(object = NULL,
 #' @return A 2-column data.frame includes chromosome length.
 #' @export
 get_chrom_data <- function(genome = "hg19"){
-  if(genome == "hg38"){
-    hg38_chrom_info <- ggcirclize::hg38_chrom_info
-    chr_df <- hg38_chrom_info$chromsize
-  }else if(genome == "hg19"){
-    hg19_chrom_info <- ggcirclize::hg19_chrom_info
-    chr_df <- hg19_chrom_info$chromsize
-  }else if(genome == "mm39"){
-    mm39_chrom_info <- ggcirclize::mm39_chrom_info
-    chr_df <- mm39_chrom_info$chromsize
-  }else if(genome == "mm10"){
-    mm10_chrom_info <- ggcirclize::mm10_chrom_info
-    chr_df <- mm10_chrom_info$chromsize
-  }else if(genome == "mm9"){
-    mm9_chrom_info <- ggcirclize::mm9_chrom_info
-    chr_df <- mm9_chrom_info$chromsize
-  }else{
-    message("Please supply genome version which in hg38,hg19,mm39,mm10 or mm9.")
+  if(!is.character(genome) || length(genome) != 1 || is.na(genome)){
+    stop("`genome` must be a single genome name.",call. = FALSE)
   }
+
+  chrom_info <- switch(
+    genome,
+    hg38 = hg38_chrom_info,
+    hg19 = hg19_chrom_info,
+    mm39 = mm39_chrom_info,
+    mm10 = mm10_chrom_info,
+    mm9 = mm9_chrom_info,
+    NULL
+  )
+
+  if(is.null(chrom_info)){
+    stop("Please supply genome version which in hg38,hg19,mm39,mm10 or mm9.",
+         call. = FALSE)
+  }
+
+  return(chrom_info$chromsize)
 }
