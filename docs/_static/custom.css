@@ -1,6 +1,20 @@
-img {
+/* Read the Docs theme tweaks */
+
+/* Figures: never overflow the content column */
+.rst-content img {
     max-width: 100%;
+    height: auto;
 }
-.bd-content img {
-    border-radius: 4px;
+
+/* Screenshot-style figures look better with a hairline border */
+.rst-content p > img {
+    border: 1px solid #e1e4e5;
+    border-radius: 3px;
+    background: #fff;
+}
+
+/* Slightly tighter spacing around figures */
+.rst-content .figure,
+.rst-content figure {
+    margin: 1.2em 0;
 }

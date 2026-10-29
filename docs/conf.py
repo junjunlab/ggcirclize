@@ -32,19 +32,37 @@ myst_heading_anchors = 3
 myst_all_links_external = True
 
 # -- Options for HTML output -------------------------------------------------
-html_theme = "sphinx_book_theme"
+# Classic Read the Docs look: blue header, dark navigation sidebar.
+html_theme = "sphinx_rtd_theme"
 html_title = "ggcirclize Reference"
+
 html_theme_options = {
-    "repository_url": "https://github.com/junjunlab/ggcirclize",
-    "use_repository_button": True,
-    "use_issues_button": True,
-    "path_to_docs": "docs",
-    "show_toc_level": 2,
+    "logo_only": False,
+    "prev_next_buttons_location": "bottom",
+    "style_external_links": True,
+    "collapse_navigation": False,
+    "sticky_navigation": True,
+    "navigation_depth": 3,
+    "includehidden": True,
+    "titles_only": False,
 }
+
+# Powers the "Edit on GitHub" link in the top-right corner.
+html_context = {
+    "display_github": True,
+    "github_user": "junjunlab",
+    "github_repo": "ggcirclize",
+    "github_version": "master",
+    "conf_py_path": "/docs/",
+}
+
 html_static_path = ["_static"]
 html_css_files = ["custom.css"]
 html_favicon = "_static/favicon.svg"
 html_logo = "_static/favicon.svg"
+
+html_show_sourcelink = False
+html_last_updated_fmt = "%Y-%m-%d"
 
 copybutton_prompt_text = ">>> "
 copybutton_prompt_is_regexp = False
