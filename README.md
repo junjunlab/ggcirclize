@@ -95,32 +95,74 @@ ggcirclize(bed, aes(end = 360, chr = chr, gstart = start, gend = end, value = va
 
 ## Layer overview
 
-**Arc layers** — data drawn on the circle itself:
+Nearly every `ggplot2` layer has a circular counterpart here. **Arc layers** draw
+on the circle itself; **track layers** draw the same thing inside a radial band
+that you place with `r0` / `r1`.
 
-`geom_arcpoint` · `geom_arcline` · `geom_arcbar` · `geom_arccol` · `geom_arcrect`
-· `geom_arctile` · `geom_arcarea` · `geom_arcribbon` · `geom_arcsegment` ·
-`geom_arcsector` · `geom_arcviolin` · `geom_arcboxplot` · `geom_arcrossbar` ·
-`geom_arcdensity` · `geom_arcpath` · `geom_arcpolygon` · `geom_arclinerange` ·
-`geom_arcarrow` · `geom_arctext`
+| `ggplot2` | Arc layer (full circle) | Track layer (radial band) |
+|:----------|:------------------------|:--------------------------|
+| `geom_point()` | `geom_arcpoint()` | `geom_trackpoint()` |
+| `geom_line()` | `geom_arcline()` | `geom_trackline()` |
+| `geom_path()` | `geom_arcpath()` | — |
+| `geom_segment()` | `geom_arcsegment()` | — |
+| `geom_bar()` (count) | `geom_arcbar()` | `geom_trackbar()` |
+| `geom_col()` (identity) | `geom_arccol()` | `geom_trackcol()` |
+| `geom_histogram()` | `geom_archistogram()` | `geom_trackhist()` |
+| `geom_rect()` | `geom_arcrect()` | `geom_trackrect()` |
+| `geom_tile()` | `geom_arctile()` | `geom_tracktile()` / `geom_tracktile2()` |
+| `geom_area()` | `geom_arcarea()` | `geom_trackarea()` |
+| `geom_ribbon()` | `geom_arcribbon()` | `geom_trackribbon()` |
+| `geom_violin()` | `geom_arcviolin()` | `geom_trackviolin()` |
+| `geom_boxplot()` | `geom_arcboxplot()` | `geom_trackboxplot()` |
+| `geom_crossbar()` | `geom_arcrossbar()` | — |
+| `geom_density()` | `geom_arcdensity()` | `geom_trackdensity()` |
+| `geom_linerange()` | `geom_arclinerange()` | — |
+| `geom_polygon()` | `geom_arcpolygon()` | — |
+| `geom_text()` | `geom_arctext()` | — |
+| `geom_rect()` (sector) | `geom_arcsector()` | `geom_tracksector()` |
+| `geom_curve()` (arrow) | `geom_arcarrow()` | — |
 
-**Track layers** — the same families, placed in a radial band via `r0` / `r1`:
-`geom_trackpoint` · `geom_trackline` · `geom_trackbar` · `geom_trackcol` ·
-`geom_trackrect` · `geom_tracktile` · `geom_tracktile2` · `geom_trackarea` ·
-`geom_trackribbon` · `geom_tracksector` · `geom_trackviolin` · `geom_trackboxplot`
-· `geom_trackdensity` · `geom_trackhist`
+**Genomic track layers** — take `chr` / `gstart` / `gend` and turn chromosomes into
+sectors through `chrom_data`:
 
-**Genomic track layers** — `chr / gstart / gend` mapped through `chrom_data`:
-`geom_trackgenomicpoint` · `geom_trackgenomicline` · `geom_trackgenomicarea` ·
-`geom_trackgenomicrect` · `geom_trackgenomictile` · `geom_trackgenomictile2` ·
-`geom_trackgenomicdensity` · `geom_trackgenomicrainfall` · `geom_trackgenomiclink` ·
-`geom_trackgenomiclabel` · `geom_trackgenomiclabel2`
+| Layer | What it draws |
+|:------|:--------------|
+| `geom_trackgenomicpoint()` | points at genomic positions |
+| `geom_trackgenomicline()` | a line joining genomic positions |
+| `geom_trackgenomicarea()` | filled area under the values |
+| `geom_trackgenomicrect()` | rectangles spanning `gstart`–`gend` |
+| `geom_trackgenomictile()` | a tile per genomic interval |
+| `geom_trackgenomictile2()` | tile variant with per-chromosome fill |
+| `geom_trackgenomicdensity()` | density along the chromosome |
+| `geom_trackgenomicrainfall()` | rainfall-style depth plot |
+| `geom_trackgenomiclink()` | links between two genomic regions |
+| `geom_trackgenomiclabel()` | gene labels with leader lines |
+| `geom_trackgenomiclabel2()` | labels placed by smart alignment |
 
-**Everything else**: `geom_chordDiagram` · `geom_cpoint` ·
-`geom_genomicNestedZoom` · `facet_sector`
+**Also available**
 
-**Low-level grobs**: `arcSectorGrob` · `arcRectGrob` · `arcPointGrob` ·
-`arcLinesGrob` · `arcSegmentsGrob` · `arcPolygonGrob` · `arcArrowGrob` ·
-`arcTextGrob` · `arcAxisGrob` · `arcLinksGrob` · `arcLinks2Grob`
+| Function | Purpose |
+|:---------|:--------|
+| `geom_chordDiagram()` | chord / link diagram from a `from`/`to`/`value` table |
+| `geom_genomicNestedZoom()` | nested zoom of a genomic region inside the same circle |
+| `facet_sector()` | split the circle into independent sectors with their own scales |
+| `geom_cpoint()` | plain scatter points, for mixing with the arc layers |
+
+**Low-level grobs** — exported, so you can compose your own layers:
+
+| Grob | Draws |
+|:-----|:------|
+| `arcSectorGrob()` | a sector (the arc equivalent of a rectangle) |
+| `arcRectGrob()` | a rectangle in polar space |
+| `arcPointGrob()` | points |
+| `arcLinesGrob()` | a polyline |
+| `arcSegmentsGrob()` | straight segments between two angles |
+| `arcPolygonGrob()` | a closed polygon |
+| `arcArrowGrob()` | an arrow between two angles |
+| `arcTextGrob()` | text with circlize-compatible facing |
+| `arcAxisGrob()` | a circular axis with ticks and labels |
+| `arcLinksGrob()` | links between two sets of angles |
+| `arcLinks2Grob()` | links with a mid-point offset |
 
 ---
 
