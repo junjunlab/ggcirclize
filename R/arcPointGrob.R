@@ -143,8 +143,8 @@ makeContent.arcPointGrob <- function(x){
   xp0 <- x0 + r*cos(theta)
   yp0 <- y0 + r*sin(theta)
 
-  xp0 <- scales::rescale(xp0,to = c(0,1),from = c(-1,1))
-  yp0 <- scales::rescale(yp0,to = c(0,1),from = c(-1,1))
+  xp0 <- scales::rescale(xp0,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
+  yp0 <- scales::rescale(yp0,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
 
   point.grob <- pointsGrob(x = xp0,y = yp0,
                            pch = pch,size = unit(size, "pt"),

@@ -184,8 +184,8 @@ makeContent.arcPolygonGrob <- function(x){
   }
 
   coord <- transform(coord,
-                     x = scales::rescale(x,to = c(0,1),from = c(-1,1)),
-                     y = scales::rescale(y,to = c(0,1),from = c(-1,1)))
+                     x = scales::rescale(x,to = c(0,1),from = c(-arc_r_limit, arc_r_limit)),
+                     y = scales::rescale(y,to = c(0,1),from = c(-arc_r_limit, arc_r_limit)))
 
 
   # grob

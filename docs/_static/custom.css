@@ -1,9 +1,15 @@
-/* Read the Docs theme tweaks */
-
-/* Figures: never overflow the content column */
+/* Figures: never overflow the content column. The circle itself is already
+   inset by the wider coordinate range in ggcirclize(), so no extra shrink. */
 .rst-content img {
     max-width: 100%;
     height: auto;
+}
+
+/* Circular genomic figures use a square canvas so outer chromosome labels
+   have equal left/right/top/bottom breathing room. */
+.rst-content p > img[src*="/images/"] {
+    display: block;
+    margin: 1em auto;
 }
 
 /* Screenshot-style figures look better with a hairline border */

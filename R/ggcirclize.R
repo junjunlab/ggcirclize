@@ -50,7 +50,7 @@ ggcirclize <- function(data = NULL,
     theme(aspect.ratio = 1,
           legend.position = c(1.2,0.5),
           plot.margin = margin(t = mg.t,r = mg.r,b = mg.b,l = mg.l,unit = "cm")) +
-    coord_cartesian(expand = FALSE,clip = "off",xlim = c(-1,1),ylim = c(-1,1))
+    coord_cartesian(expand = FALSE,clip = "off",xlim = c(-1.35,1.35),ylim = c(-1.35,1.35))
 
 
   class(p) <- c("ggcirclize", class(p))

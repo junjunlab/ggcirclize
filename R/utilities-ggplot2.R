@@ -8,6 +8,17 @@
 # symbols, which are not part of ggplot2's public API.
 # ==============================================================================
 
+# Radius of the drawing area, in data units.
+#
+# Every grob maps data coordinates to npc with from = c(-arc_r_limit, arc_r_limit), which puts
+# r = 1 exactly on the edge of the panel.  Facet strip labels are drawn
+# outside the circle at r = r1 + strip.label.space + axis.space, which reaches
+# 1.21 with the defaults, i.e. npc = 1.105 -- 10.5% past the panel and clipped
+# by the device edge.  Mapping from a slightly larger window instead keeps
+# everything inside: 1.21 / 1.35 = 0.948 npc, with margin left over.
+# coord_cartesian(xlim = c(-1.35, 1.35)) in ggcirclize() keeps the two in sync.
+arc_r_limit <- 1.35
+
 
 #' Merge two sets of default values
 #'

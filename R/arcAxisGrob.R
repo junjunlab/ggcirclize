@@ -296,7 +296,7 @@ makeContent.arcAxisGrob <- function(x) {
   if (!is.null(lwd)) line.gp$lwd <- lwd
 
   # ============================================================ 角度 → npc
-  npc <- function(v) scales::rescale(v, to = c(0, 1), from = c(-1, 1))
+  npc <- function(v) scales::rescale(v, to = c(0, 1), from = c(-arc_r_limit, arc_r_limit))
 
   # 数据值 → 角度（弧度），与所有图元共用同一个映射
   ang <- function(v) arc_theta(v, xscale, s.ed, e.ed, clock.wise = clock.wise)

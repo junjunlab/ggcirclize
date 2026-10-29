@@ -166,7 +166,7 @@ arc_resolve_facing <- function(facing = NULL, curved.label = FALSE,
 
   facing <- arc_resolve_facing(facing, curved.label, inward)
 
-  npc <- function(v) scales::rescale(v, to = c(0, 1), from = c(-1, 1))
+  npc <- function(v) scales::rescale(v, to = c(0, 1), from = c(-arc_r_limit, arc_r_limit))
 
   # ---------------------------------------------------------------- 尺度扩展
   ext.theta <- (end - start) * extend.xscale

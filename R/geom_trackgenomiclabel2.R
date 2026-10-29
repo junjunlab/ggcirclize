@@ -184,8 +184,8 @@ GeomTrackgenomiclabel2 <- ggproto("GeomTrackgenomiclabel2", Geom,
                                       th <- seq(tmp$gstart.th,tmp$gend.th,length = 100)
                                       xuh <- r.y[1]*cos(as.radian(th))
                                       yuh <- r.y[1]*sin(as.radian(th))
-                                      xuh <- scales::rescale(xuh,to = c(0,1),from = c(-1,1))
-                                      yuh <- scales::rescale(yuh,to = c(0,1),from = c(-1,1))
+                                      xuh <- scales::rescale(xuh,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
+                                      yuh <- scales::rescale(yuh,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
 
                                       top_hline <- polylineGrob(x = xuh,y = yuh,
                                                                 gp = link_gp,
@@ -194,8 +194,8 @@ GeomTrackgenomiclabel2 <- ggproto("GeomTrackgenomiclabel2", Geom,
                                       rup <- seq(r.y[2],r.y[1],length = 100)
                                       xup <- rup*cos(as.radian(tmp$mid.th))
                                       yup <- rup*sin(as.radian(tmp$mid.th))
-                                      xup <- scales::rescale(xup,to = c(0,1),from = c(-1,1))
-                                      yup <- scales::rescale(yup,to = c(0,1),from = c(-1,1))
+                                      xup <- scales::rescale(xup,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
+                                      yup <- scales::rescale(yup,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
 
                                       top_vline <- polylineGrob(x = xup,y = yup,
                                                                 gp = link_gp,
@@ -209,8 +209,8 @@ GeomTrackgenomiclabel2 <- ggproto("GeomTrackgenomiclabel2", Geom,
                                       th <- rev(seq(tmp$mid.th,tmp$mid.th.new,length = 100))
                                       xarc <- rarc*cos(as.radian(th))
                                       yarc <- rarc*sin(as.radian(th))
-                                      xarc <- scales::rescale(xarc,to = c(0,1),from = c(-1,1))
-                                      yarc <- scales::rescale(yarc,to = c(0,1),from = c(-1,1))
+                                      xarc <- scales::rescale(xarc,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
+                                      yarc <- scales::rescale(yarc,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
 
                                       arcline <- polylineGrob(x = xarc,y = yarc,
                                                               gp = link_gp,
@@ -219,8 +219,8 @@ GeomTrackgenomiclabel2 <- ggproto("GeomTrackgenomiclabel2", Geom,
                                       rbt <- seq(r.y[4],r.y[3],length = 100)
                                       xbt <- rbt*cos(as.radian(tmp$mid.th.new))
                                       ybt <- rbt*sin(as.radian(tmp$mid.th.new))
-                                      xbt <- scales::rescale(xbt,to = c(0,1),from = c(-1,1))
-                                      ybt <- scales::rescale(ybt,to = c(0,1),from = c(-1,1))
+                                      xbt <- scales::rescale(xbt,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
+                                      ybt <- scales::rescale(ybt,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
 
                                       bottom_vline <- polylineGrob(x = xbt,y = ybt,
                                                                    gp = link_gp,

@@ -104,21 +104,21 @@ makeContent.arcLinks2Grob <- function(x){
     xf <- x0 + r0*cos(theta)
     yf <- y0 + r0*sin(theta)
 
-    xf <- scales::rescale(xf,to = c(0,1),from = c(-1,1))
-    yf <- scales::rescale(yf,to = c(0,1),from = c(-1,1))
+    xf <- scales::rescale(xf,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
+    yf <- scales::rescale(yf,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
 
     xt <- x0 + r1*cos(theta)
     yt <- y0 + r1*sin(theta)
 
-    xt <- scales::rescale(xt,to = c(0,1),from = c(-1,1))
-    yt <- scales::rescale(yt,to = c(0,1),from = c(-1,1))
+    xt <- scales::rescale(xt,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
+    yt <- scales::rescale(yt,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
 
     # curve height with control points
     xm <- x0 + (r - curve.height)*cos(as.radian((start + end)/2))
     ym <- y0 + (r - curve.height)*sin(as.radian((start + end)/2))
 
-    xm <- scales::rescale(xm,to = c(0,1),from = c(-1,1))
-    ym <- scales::rescale(ym,to = c(0,1),from = c(-1,1))
+    xm <- scales::rescale(xm,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
+    ym <- scales::rescale(ym,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
 
     res <- bezier_points(c(xf[1],xm,xm,xt[2]),c(yf[1],ym,ym,yt[2]))
 
@@ -236,8 +236,8 @@ makeContent.arcLinks2Grob <- function(x){
       link.y <- c(y.arc1,curve1.y,y.arc2,curve2.y)
     }
 
-    link.x <- scales::rescale(link.x,to = c(0,1),from = c(-1,1))
-    link.y <- scales::rescale(link.y,to = c(0,1),from = c(-1,1))
+    link.x <- scales::rescale(link.x,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
+    link.y <- scales::rescale(link.y,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
 
     # ==========================================================================
     # combine x,y

@@ -341,8 +341,8 @@ GeomGenomicNestedZoom <- ggproto("GeomGenomicNestedZoom", Geom,
                                        xp.raw.b <- x0 + r0*cos(thata.raw.b)
                                        yp.raw.b <- y0 + r0*sin(thata.raw.b)
 
-                                       xu <- scales::rescale(c(xp.raw.up,xp.raw.b),to = c(0,1),from = c(-1,1))
-                                       yu <- scales::rescale(c(yp.raw.up,yp.raw.b),to = c(0,1),from = c(-1,1))
+                                       xu <- scales::rescale(c(xp.raw.up,xp.raw.b),to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
+                                       yu <- scales::rescale(c(yp.raw.up,yp.raw.b),to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
 
                                        upper.panel <- polygonGrob(x = xu,
                                                                   y = yu,
@@ -377,8 +377,8 @@ GeomGenomicNestedZoom <- ggproto("GeomGenomicNestedZoom", Geom,
                                        xp34 <- x0 + r34*cos(thata.34)
                                        yp34 <- y0 + r34*sin(thata.34)
 
-                                       xp <- scales::rescale(c(xp0,rev(xp23),xp4,rev(xp34)),to = c(0,1),from = c(-1,1))
-                                       yp <- scales::rescale(c(yp0,rev(yp23),yp4,rev(yp34)),to = c(0,1),from = c(-1,1))
+                                       xp <- scales::rescale(c(xp0,rev(xp23),xp4,rev(xp34)),to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
+                                       yp <- scales::rescale(c(yp0,rev(yp23),yp4,rev(yp34)),to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
 
                                        middle.panel <- polygonGrob(x = xp,
                                                                    y = yp,
@@ -400,8 +400,8 @@ GeomGenomicNestedZoom <- ggproto("GeomGenomicNestedZoom", Geom,
                                        xp.b <- x0 + r6*cos(thata.zoom.b)
                                        yp.b <- y0 + r6*sin(thata.zoom.b)
 
-                                       xb <- scales::rescale(c(xp.up,xp.b),to = c(0,1),from = c(-1,1))
-                                       yb <- scales::rescale(c(yp.up,yp.b),to = c(0,1),from = c(-1,1))
+                                       xb <- scales::rescale(c(xp.up,xp.b),to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
+                                       yb <- scales::rescale(c(yp.up,yp.b),to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
 
                                        bottom.panel <- polygonGrob(x = xb,
                                                                    y = yb,

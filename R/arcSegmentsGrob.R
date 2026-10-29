@@ -172,8 +172,8 @@ makeContent.arcSegmentsGrob <- function(x){
     return(rect.df)
   }) %>% do.call("rbind",.) -> all.df
 
-  xp <- scales::rescale(all.df$x,to = c(0,1),from = c(-1,1))
-  yp <- scales::rescale(all.df$y,to = c(0,1),from = c(-1,1))
+  xp <- scales::rescale(all.df$x,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
+  yp <- scales::rescale(all.df$y,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
 
   # grobs
   polyline.grob <- polylineGrob(x = xp,y = yp,

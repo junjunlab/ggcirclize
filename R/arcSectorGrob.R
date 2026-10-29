@@ -150,16 +150,16 @@ makeContent.arcSectorGrob <- function(x){
     yp0 <- y0 + r0_ed*sin(theta)
   }
 
-  xp0 <- scales::rescale(xp0,to = c(0,1),from = c(-1,1))
-  yp0 <- scales::rescale(yp0,to = c(0,1),from = c(-1,1))
+  xp0 <- scales::rescale(xp0,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
+  yp0 <- scales::rescale(yp0,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
   # ==============================================
   # outer
   # ==============================================
   xp1 <- x0 + r1_ed*cos(theta)
   yp1 <- y0 + r1_ed*sin(theta)
 
-  xp1 <- scales::rescale(xp1,to = c(0,1),from = c(-1,1))
-  yp1 <- scales::rescale(yp1,to = c(0,1),from = c(-1,1))
+  xp1 <- scales::rescale(xp1,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
+  yp1 <- scales::rescale(yp1,to = c(0,1),from = c(-arc_r_limit, arc_r_limit))
 
   df <- data.frame(x = c(xp0,rev(xp1)),y = c(yp0,rev(yp1)),
                    id = "sector",
